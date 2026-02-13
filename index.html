@@ -60,10 +60,13 @@
             <li><a href="#giveaways">Giveaways</a></li>
         </ul>
         
-        <div class="theme-switcher">
-            <button class="theme-btn yellow" onclick="setTheme('default')"></button>
-            <button class="theme-btn green" onclick="setTheme('green')"></button>
-        </div>
+        <div class="theme-selection">
+    <i class="fas fa-palette" style="color: #666; margin-right: 8px;"></i>
+    <div class="theme-btns-container">
+        <button class="t-btn yellow" onclick="setTheme('default')" title="Желтая тема"></button>
+        <button class="t-btn green" onclick="setTheme('green')" title="Зеленая тема"></button>
+    </div>
+</div>
     </nav>
 </header>
 
@@ -209,15 +212,6 @@
         </section>       
     </main>
 
-    <div class="social-icons">
-        <a href="https://t.me/Bancus_Rucoy" class="custom-icon" target="_blank">
-            <img src="images/tglogo.png" alt="Telegram">
-        </a>
-        <a href="https://discord.gg/pBmu7Q73" class="custom-icon" target="_blank">
-            <img src="images/dslogo.png" alt="WhatsApp">
-        </a>
-    </div>
-
    <script>
     // 1. ТЕМЫ ОФОРМЛЕНИЯ
     function setTheme(themeName) {
@@ -343,5 +337,18 @@
     });
 </script>
 
+<footer class="minimal-footer">
+    <div class="footer-divider"></div>
+    <p class="footer-copyright">© 2026 Bancus Rucoy</p>
+    <div class="footer-links">
+        <a href="https://t.me/Bancus_Rucoy" target="_blank" class="f-link">
+            <i class="fab fa-telegram-plane"></i> Telegram
+        </a>
+        <span class="f-separator">|</span>
+        <a href="https://discord.gg/pBmu7Q73" target="_blank" class="f-link">
+            <i class="fab fa-discord"></i> Discord
+        </a>
+    </div>
+</footer>
 </body>
 </html>
