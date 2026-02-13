@@ -54,7 +54,7 @@
         <div class="logo">Bancus Rucoy</div>
         <ul class="nav-links">
             <li><a href="#home">Bancus</a></li>
-            <li><a href="#partners">Partners</a></li>
+            <li><a href="#partners">Parterres</a></li>
             <li><a href="#scam-list">Scamers</a></li>
             <li><a href="#gold">Gold</a></li>
             <li><a href="#giveaways">Giveaways</a></li>
@@ -96,22 +96,43 @@
     </div>
 
     <div class="partners-grid">
-        <div class="partner-card">
-            <div class="partner-banner"></div> <div class="partner-content">
-                <div class="partner-avatar">
-                    <img src="images/parth1.jpg" alt="Rucoy Shop">
+    <div class="partner-card">
+        <div class="partner-banner" style="background: linear-gradient(45deg, #2f9af7 0%, #00f2fe 100%);"></div> 
+        <div class="partner-content">
+            <div class="partner-avatar">
+                <img src="images/parth1.jpg" alt="Rucoy Shop">
+            </div>
+            <h3 class="partner-name">Rucoy Online Shop 💸</h3>
+            <p class="partner-desc">#Shop #Telegram<br>Приветствую всех на шоп сервере рукоя</p>
+            
+            <div class="partner-footer">
+                <div class="online-status">
+                    <span class="status-dot"></span> 24/7 Активен
                 </div>
-                <h3 class="partner-name">Rucoy Online Shop 💸</h3>
-                <p class="partner-desc">Приветствую всех на шоп сервере рукоя</p>
-                
-                <div class="partner-footer">
-                    <div class="online-status">
-                        <span class="status-dot"></span> 24/7 Активен
-                    </div>
-                    <a href="https://t.me/Rucoy_shop1" target="_blank" class="btn-join">Вступить</a>
-                </div>
+                <a href="https://t.me/Rucoy_shop1" target="_blank" class="btn-join">В магазин</a>
             </div>
         </div>
+    </div>
+
+    <div class="partner-card" style="background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="partner-banner" style="background: linear-gradient(45deg, #f2d074 0%, #fbc2eb 100%);"></div> 
+        
+        <div class="partner-content">
+            <div class="partner-avatar">
+                <img src="images/parher2.jpg" alt="Чат Дымка">
+            </div>
+            <h3 class="partner-name">чат | дымка</h3>
+            <p class="partner-desc">#Chat #Telegram<br>Чат для общения вместе с друзьями</p>
+            
+            <div class="partner-footer">
+                <div class="online-status">
+                    <span class="status-dot"></span> 24/7 Активен
+                </div>
+                <a href="https://t.me/korovka222chat" target="_blank" class="btn-join" style="background: #a18cd1;">Вступить</a>
+            </div>
+        </div>
+    </div>
+</div>
 
         </div>
 </section>
@@ -307,15 +328,30 @@
                     </div>
                 `;
             } else {
+                // ВЫВОД КЛАНА (ОБНОВЛЕННЫЙ)
                 resultsBox.innerHTML = `
                     <div class="player-card-result">
                         <div class="result-header"><i class="fas fa-fort-awesome"></i> Информация о клане</div>
                         <div class="result-body">
                             <h3>${data.name}</h3>
+                            
+                            <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
+                                <span class="stat-label"><i class="fas fa-scroll"></i> Описание:</span>
+                                <span class="stat-value" style="margin-top: 5px; font-style: italic; color: #ddd;">
+                                    ${data.description}
+                                </span>
+                            </div>
+
                             <div class="stat-row">
                                 <span class="stat-label"><i class="fas fa-users"></i> Участников</span>
                                 <span class="stat-value">${data.members}</span>
                             </div>
+
+                            <div class="stat-row">
+                                <span class="stat-label"><i class="fas fa-calendar-alt"></i> Создан</span>
+                                <span class="stat-value">${data.created_at}</span>
+                            </div>
+
                             <a href="${data.url}" target="_blank" class="btn-link">
                                 <i class="fas fa-chess-rook"></i> Страница клана
                             </a>
@@ -351,5 +387,4 @@
     </div>
 </footer>
 </body>
-
 </html>
