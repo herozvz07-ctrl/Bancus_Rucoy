@@ -6,6 +6,23 @@
     <title>Bancus Rucoy</title>
 
     <style>
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+        background: #2d2d2d;
+        border: 2px solid #4a90e2;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        max-width: 400px;
+        margin: 20px auto;
+    }
+
+
         body {
     background-color: #1a1a1a;
     color: #e0e0e0;
@@ -44,30 +61,45 @@
     border-radius: 5px;
     margin-top: 15px;
 }
+
+.partner-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.partner-card:active {
+    transform: scale(0.97);
+}
+
     </style>    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-    <nav>
-        <div class="logo">Bancus Rucoy</div>
-        <ul class="nav-links">
-            <li><a href="#home">Bancus</a></li>
-            <li><a href="#partners">Parterres</a></li>
-            <li><a href="#scam-list">Scamers</a></li>
-            <li><a href="#gold">Gold</a></li>
-            <li><a href="#giveaways">Giveaways</a></li>
-        </ul>
-        
-        <div class="theme-selection">
-    <i class="fas fa-palette" style="color: #666; margin-right: 8px;"></i>
-    <div class="theme-btns-container">
-        <button class="t-btn yellow" onclick="setTheme('default')" title="Желтая тема"></button>
-        <button class="t-btn green" onclick="setTheme('green')" title="Зеленая тема"></button>
+  <nav>
+    <div class="logo">Bancus Rucoy</div>
+
+    <!-- Бургер кнопка -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
     </div>
-</div>
-    </nav>
+
+    <ul class="nav-links">
+        <li><a href="#home">Bancus</a></li>
+        <li><a href="#partners">partners</a></li>
+        <li><a href="#scam-list">Scamers</a></li>
+        <li><a href="#gold">Gold</a></li>
+        <li><a href="#giveaways">Giveaways</a></li>
+    </ul>
+        
+    <div class="theme-selection">
+        <i class="fas fa-palette" style="color: #666; margin-right: 8px;"></i>
+        <div class="theme-btns-container">
+            <button class="t-btn yellow" onclick="setTheme('default')" title="Желтая тема"></button>
+            <button class="t-btn green" onclick="setTheme('green')" title="Зеленая тема"></button>
+        </div>
+    </div>
+</nav>
 </header>
 
     <main>
@@ -100,7 +132,7 @@
         <div class="partner-banner" style="background: linear-gradient(45deg, #2f9af7 0%, #00f2fe 100%);"></div> 
         <div class="partner-content">
             <div class="partner-avatar">
-                <img src="images/parth1.jpg" alt="Rucoy Shop">
+                <img src="images/parth1.jpg" loading="lazy" alt="Rucoy Shop">
             </div>
             <h3 class="partner-name">Rucoy Online Shop 💸</h3>
             <p class="partner-desc">#Shop #Telegram<br>Приветствую всех на шоп сервере рукоя</p>
@@ -109,7 +141,7 @@
                 <div class="online-status">
                     <span class="status-dot"></span> 24/7 Активен
                 </div>
-                <a href="https://t.me/Rucoy_shop1" target="_blank" class="btn-join">В магазин</a>
+                <a href="https://t.me/Rucoy_shop1" target="_blank" class="btn-join">Join</a>
             </div>
         </div>
     </div>
@@ -119,7 +151,7 @@
         
         <div class="partner-content">
             <div class="partner-avatar">
-                <img src="images/parher2.jpg" alt="Чат Дымка">
+                <img src="images/parher2.jpg" loading="lazy" alt="Чат | Дымка">
             </div>
             <h3 class="partner-name">чат | дымка</h3>
             <p class="partner-desc">#Chat #Telegram<br>Чат для общения вместе с друзьями</p>
@@ -128,7 +160,7 @@
                 <div class="online-status">
                     <span class="status-dot"></span> 24/7 Активен
                 </div>
-                <a href="https://t.me/korovka222chat" target="_blank" class="btn-join" style="background: #a18cd1;">Вступить</a>
+                <a href="https://t.me/korovka222chat" target="_blank" class="btn-join" style="background: #a18cd1;">Join</a>
             </div>
         </div>
     </div>
@@ -371,6 +403,34 @@
             runRucoySearch();
         }
     });
+
+    function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+}
+
+// Авто-закрытие после клика
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+    });
+});
+
+function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    nav.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+}
+
+// Закрытие по клику вне меню
+document.addEventListener('click', (e) => {
+    const menu = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.menu-toggle');
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
 </script>
 
 <footer class="minimal-footer">

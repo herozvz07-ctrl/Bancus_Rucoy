@@ -715,3 +715,58 @@ nav {
         margin-top: 10px;
     }
 }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1f1f1f;
+        flex-direction: column;
+        width: 100%;
+        padding: 15px;
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .theme-selection {
+        display: none; /* чтобы не ломало мобильную версию */
+    }
+}
+
+.partner-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.partner-card:active {
+    transform: scale(0.97);
+}
