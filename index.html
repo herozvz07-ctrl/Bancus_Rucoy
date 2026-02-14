@@ -3,448 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bancus Rucoy</title>
-
-    <style>
-    body {
-        background-color: #1a1a1a;
-        color: #e0e0e0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .card {
-        background: #2d2d2d;
-        border: 2px solid #4a90e2;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        max-width: 400px;
-        margin: 20px auto;
-    }
-
-
-        body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.card {
-    background: #2d2d2d;
-    border: 2px solid #4a90e2;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    max-width: 400px;
-    margin: 20px auto;
-}
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #444;
-    padding: 8px 0;
-}
-
-.online-status {
-    color: #4caf50; /* Зеленый для онлайна */
-    font-weight: bold;
-}
-
-.btn-link {
-    display: block;
-    text-align: center;
-    background: #4a90e2;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 15px;
-}
-
-.partner-card {
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.partner-card:active {
-    transform: scale(0.97);
-}
-
-    </style>    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Bancus Rucoy — поиск игроков и кланов Rucoy Online, проверенные партнёры, база скамеров и актуальные цены на gold">
+    <meta name="keywords" content="Rucoy Online, Bancus, поиск игроков, кланы, gold, скамеры">
+    <meta name="theme-color" content="#f1c40f">
+    <title>Bancus Rucoy — Поиск игроков, партнёры и база скамеров</title>
+    
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
 
-    <header>
-  <nav>
-    <div class="logo">Bancus Rucoy</div>
+    <!-- HEADER -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">Bancus Rucoy</div>
 
-    <!-- Бургер кнопка -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
+            <!-- Бургер кнопка -->
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Открыть меню">
+                <i class="fas fa-bars"></i>
+            </button>
 
-    <ul class="nav-links">
-        <li><a href="#home">Bancus</a></li>
-        <li><a href="#partners">partners</a></li>
-        <li><a href="#scam-list">Scamers</a></li>
-        <li><a href="#gold">Gold</a></li>
-        <li><a href="#giveaways">Giveaways</a></li>
-    </ul>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#partners">Партнёры</a></li>
+                <li><a href="#scam-list">Скамеры</a></li>
+                <li><a href="#gold">Gold</a></li>
+                <li><a href="#giveaways">Розыгрыши</a></li>
+            </ul>
+            
+            <!-- Переключатель тем -->
+            <div class="theme-selection" aria-label="Выбор темы оформления">
+                <i class="fas fa-palette" aria-hidden="true"></i>
+                <div class="theme-btns-container">
+                    <button class="t-btn yellow" onclick="setTheme('default')" aria-label="Жёлтая тема" title="Жёлтая тема"></button>
+                    <button class="t-btn green" onclick="setTheme('green')" aria-label="Зелёная тема" title="Зелёная тема"></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
         
-    <div class="theme-selection">
-        <i class="fas fa-palette" style="color: #666; margin-right: 8px;"></i>
-        <div class="theme-btns-container">
-            <button class="t-btn yellow" onclick="setTheme('default')" title="Желтая тема"></button>
-            <button class="t-btn green" onclick="setTheme('green')" title="Зеленая тема"></button>
-        </div>
-    </div>
-</nav>
-</header>
-
-    <main>
+        <!-- СЕКЦИЯ: ГЛАВНАЯ -->
         <section id="home" class="content-section active">
             <div class="search-section">
-    <div class="search-box">
-        <select id="search-type">
-            <option value="player">Игрок</option>
-            <option value="guild">Клан</option>
-        </select>
-        <input type="text" id="search-input" placeholder="Введите ник или название...">
-        <button onclick="runRucoySearch()"><i class="fas fa-search"></i></button>
-    </div>
-    <div id="search-results" class="results-container"></div>
-</div>
-            <div class="container">
+                <form class="search-box" onsubmit="event.preventDefault(); runRucoySearch();">
+                    <select id="search-type" aria-label="Тип поиска">
+                        <option value="player">Игрок</option>
+                        <option value="guild">Клан</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Введите ник или название..." 
+                        aria-label="Поле поиска"
+                        autocomplete="off"
+                    >
+                    <button type="submit" aria-label="Найти">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <div id="search-results" class="results-container" role="region" aria-live="polite"></div>
+            </div>
+            
+            <div class="container welcome-section">
                 <h1>Добро пожаловать в Bancus Rucoy</h1>
-                <p>Ваш надежный проводник в мире Rucoy Online. Используйте меню для навигации.</p>
+                <p>Ваш надёжный проводник в мире Rucoy Online. Используйте меню для навигации по разделам.</p>
             </div>
         </section>
 
-        <section id="partners" class="content-section container">
-    <div class="partners-header">
-        <h2 class="section-title">Наши Партнеры</h2>
-        <p class="section-subtitle">Проверенные сообщества и торговые площадки</p>
-    </div>
-
-    <div class="partners-grid">
-    <div class="partner-card">
-        <div class="partner-banner" style="background: linear-gradient(45deg, #2f9af7 0%, #00f2fe 100%);"></div> 
-        <div class="partner-content">
-            <div class="partner-avatar">
-                <img src="images/parth1.jpg" loading="lazy" alt="Rucoy Shop">
-            </div>
-            <h3 class="partner-name">Rucoy Online Shop 💸</h3>
-            <p class="partner-desc">#Shop #Telegram<br>Приветствую всех на шоп сервере рукоя</p>
-            
-            <div class="partner-footer">
-                <div class="online-status">
-                    <span class="status-dot"></span> 24/7 Активен
+        <!-- СЕКЦИЯ: ПАРТНЁРЫ -->
+        <section id="partners" class="content-section">
+            <div class="container">
+                <div class="partners-header">
+                    <h2 class="section-title">Наши Партнёры</h2>
+                    <p class="section-subtitle">Проверенные сообщества и торговые площадки</p>
                 </div>
-                <a href="https://t.me/Rucoy_shop1" target="_blank" class="btn-join">Join</a>
-            </div>
-        </div>
-    </div>
 
-    <div class="partner-card" style="background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.1);">
-        <div class="partner-banner" style="background: linear-gradient(45deg, #f2d074 0%, #fbc2eb 100%);"></div> 
-        
-        <div class="partner-content">
-            <div class="partner-avatar">
-                <img src="images/parher2.jpg" loading="lazy" alt="Чат | Дымка">
-            </div>
-            <h3 class="partner-name">чат | дымка</h3>
-            <p class="partner-desc">#Chat #Telegram<br>Чат для общения вместе с друзьями</p>
-            
-            <div class="partner-footer">
-                <div class="online-status">
-                    <span class="status-dot"></span> 24/7 Активен
+                <div class="partners-grid">
+                    <!-- Партнёр 1 -->
+                    <article class="partner-card">
+                        <div class="partner-banner" style="background: linear-gradient(45deg, #2f9af7 0%, #00f2fe 100%);"></div> 
+                        <div class="partner-content">
+                            <div class="partner-avatar">
+                                <img src="images/parth1.jpg" alt="Rucoy Online Shop" width="80" height="80" loading="lazy">
+                            </div>
+                            <h3 class="partner-name">Rucoy Online Shop 💸</h3>
+                            <p class="partner-desc">#Shop #Telegram<br>Приветствую всех на шоп сервере Rucoy</p>
+                            
+                            <div class="partner-footer">
+                                <div class="online-status">
+                                    <span class="status-dot" aria-hidden="true"></span> 24/7 Активен
+                                </div>
+                                <a href="https://t.me/Rucoy_shop1" target="_blank" rel="noopener noreferrer" class="btn-join">
+                                    Перейти
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Партнёр 2 -->
+                    <article class="partner-card">
+                        <div class="partner-banner" style="background: linear-gradient(45deg, #f2d074 0%, #fbc2eb 100%);"></div> 
+                        <div class="partner-content">
+                            <div class="partner-avatar">
+                                <img src="images/parher2.jpg" alt="Чат Дымка" width="80" height="80" loading="lazy">
+                            </div>
+                            <h3 class="partner-name">Чат | Дымка</h3>
+                            <p class="partner-desc">#Chat #Telegram<br>Чат для общения вместе с друзьями</p>
+                            
+                            <div class="partner-footer">
+                                <div class="online-status">
+                                    <span class="status-dot" aria-hidden="true"></span> 24/7 Активен
+                                </div>
+                                <a href="https://t.me/korovka222chat" target="_blank" rel="noopener noreferrer" class="btn-join" style="background: #a18cd1;">
+                                    Перейти
+                                </a>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-                <a href="https://t.me/korovka222chat" target="_blank" class="btn-join" style="background: #a18cd1;">Join</a>
             </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-</section>
-
-        <section id="scam-list" class="content-section container">
-    <div class="scam-header-box">
-        <img src="images/Cerberus.PNG.webp" alt="Cerberus" class="free-icon">
-        
-        <h2 class="scam-header-title">Список Скамеров</h2>
-        <p class="scam-header-subtitle">база данных нарушителей Bancus Rucoy</p>
-    </div>
-
-    <div class="scam-text-list">
-        
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Dwightschrut</span>
-                <span class="scam-reason"> Обман при обмене Gold</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/522" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Ultra Mage Xv</span>
-                <span class="scam-reason">Обман на Key Ring</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/4030" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Dimon Limon Ha</span>
-                <span class="scam-reason">Не вернул долг</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/515" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname"> Magic Toop</span>
-                <span class="scam-reason">Не заплатил за буст</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/12633" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname"> Trz Blood Rain</span>
-                <span class="scam-reason"> Скам на акаунт в игре</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/21497" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Ledi Bulba</span>
-                <span class="scam-reason"> Обман при обмене Gold</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/23779" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Sawerenokt</span>
-                <span class="scam-reason"> Обман при обмене Gold</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/29834" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        <div class="scam-text-item">
-            <div class="scam-status">PLAER</div>
-            <div class="scam-details">
-                <span class="scam-nickname">Mini Yetit</span>
-                <span class="scam-reason"> Скам на вещи</span>
-            </div>
-            <a href="https://t.me/Bancus_Rucoy/17/47557" target="_blank" class="btn-prufs-small">Proofs</a>
-        </div>
-
-        </div>
-</section>
-
-        <section id="gold" class="content-section container">
-            <h2 class="section-title">Продажа Gold</h2>
-            <p>Актуальный курс и наличие валюты.</p>
         </section>
 
-        <section id="giveaways" class="content-section container">
-            <h2 class="section-title">Giveaways</h2>
-            <p>Участвуйте в розыгрышах и получайте призы!</p>
-        </section>       
+        <!-- СЕКЦИЯ: СКАМЕРЫ -->
+        <section id="scam-list" class="content-section">
+            <div class="container">
+                <div class="scam-header-box">
+                    <img src="images/Cerberus.PNG.webp" alt="Логотип Cerberus" class="free-icon" width="150" height="150" loading="lazy">
+                    <h2 class="scam-header-title">Список Скамеров</h2>
+                    <p class="scam-header-subtitle">База данных нарушителей Bancus Rucoy</p>
+                </div>
+
+                <div class="scam-text-list">
+                    
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Dwightschrut</span>
+                            <span class="scam-reason">Обман при обмене Gold</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/522" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Ultra Mage Xv</span>
+                            <span class="scam-reason">Обман на Key Ring</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/4030" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Dimon Limon Ha</span>
+                            <span class="scam-reason">Не вернул долг</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/515" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Magic Toop</span>
+                            <span class="scam-reason">Не заплатил за буст</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/12633" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Trz Blood Rain</span>
+                            <span class="scam-reason">Скам на аккаунт в игре</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/21497" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Ledi Bulba</span>
+                            <span class="scam-reason">Обман при обмене Gold</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/23779" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Sawerenokt</span>
+                            <span class="scam-reason">Обман при обмене Gold</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/29834" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                    <article class="scam-text-item">
+                        <div class="scam-status">PLAYER</div>
+                        <div class="scam-details">
+                            <span class="scam-nickname">Mini Yetit</span>
+                            <span class="scam-reason">Скам на вещи</span>
+                        </div>
+                        <a href="https://t.me/Bancus_Rucoy/17/47557" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
+                            Доказательства
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ: GOLD -->
+        <section id="gold" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Продажа Gold</h2>
+                <p class="section-subtitle">Актуальный курс и наличие валюты</p>
+                <div class="gold-placeholder">
+                    <i class="fas fa-coins fa-3x" style="color: var(--main-color); margin-bottom: 20px;"></i>
+                    <p>Раздел в разработке</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ: GIVEAWAYS -->
+        <section id="giveaways" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Giveaways</h2>
+                <p class="section-subtitle">Участвуйте в розыгрышах и получайте призы!</p>
+                <div class="giveaway-placeholder">
+                    <i class="fas fa-gift fa-3x" style="color: var(--main-color); margin-bottom: 20px;"></i>
+                    <p>Раздел в разработке</p>
+                </div>
+            </div>
+        </section>
+        
     </main>
 
-   <script>
-    // 1. ТЕМЫ ОФОРМЛЕНИЯ
-    function setTheme(themeName) {
-        if (themeName === 'default') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('selectedTheme', 'default');
-        } else {
-            document.documentElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('selectedTheme', themeName);
+    <!-- FOOTER -->
+    <footer class="minimal-footer">
+        <div class="footer-divider"></div>
+        <p class="footer-copyright">© 2026 Bancus Rucoy</p>
+        <div class="footer-links">
+            <a href="https://t.me/Bancus_Rucoy" target="_blank" rel="noopener noreferrer" class="f-link">
+                <i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram
+            </a>
+            <span class="f-separator" aria-hidden="true">|</span>
+            <a href="https://discord.gg/pBmu7Q73" target="_blank" rel="noopener noreferrer" class="f-link">
+                <i class="fab fa-discord" aria-hidden="true"></i> Discord
+            </a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // ============================================
+        // 1. СИСТЕМА ТЕМ
+        // ============================================
+        function setTheme(themeName) {
+            if (themeName === 'default') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('selectedTheme', 'default');
+            } else {
+                document.documentElement.setAttribute('data-theme', themeName);
+                localStorage.setItem('selectedTheme', themeName);
+            }
         }
-    }
 
-    // Восстановление темы при загрузке страницы
-    const currentTheme = localStorage.getItem('selectedTheme');
-    if (currentTheme) setTheme(currentTheme);
+        // Восстановление темы при загрузке
+        (function() {
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme && savedTheme !== 'default') {
+                setTheme(savedTheme);
+            }
+        })();
 
-    // 2. НАВИГАЦИЯ МЕЖДУ СЕКЦИЯМИ
-    const navLinks = document.querySelectorAll('.nav-links a, .hero-buttons a');
-    const sections = document.querySelectorAll('.content-section');
+        // ============================================
+        // 2. НАВИГАЦИЯ МЕЖДУ СЕКЦИЯМИ
+        // ============================================
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('.content-section');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetId = href.substring(1);
-                
-                sections.forEach(s => s.classList.remove('active'));
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) targetSection.classList.add('active');
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    
+                    // Убираем активный класс у всех секций
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Показываем нужную секцию
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // Закрываем мобильное меню
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    // Скролл наверх
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ============================================
+        // 3. ПОИСК RUCOY ONLINE
+        // ============================================
+        async function runRucoySearch() {
+            const nameInput = document.getElementById('search-input');
+            const type = document.getElementById('search-type').value;
+            const resultsBox = document.getElementById('search-results');
+            const name = nameInput.value.trim();
+            
+            if (!name) {
+                alert("Введите имя для поиска!");
+                return;
+            }
+
+            resultsBox.style.display = 'block';
+            resultsBox.innerHTML = `
+                <div class="loading-spinner">
+                    <i class="fas fa-circle-notch fa-spin fa-2x"></i><br><br>
+                    Связываюсь с сервером Rucoy...
+                </div>
+            `;
+
+            try {
+                const botUrl = "https://telegram-bot-6pm1.onrender.com"; 
+                const response = await fetch(`${botUrl}/api/search?name=${encodeURIComponent(name)}&type=${type}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    resultsBox.innerHTML = `
+                        <div class="player-card-result" style="border-color: #ff4444; text-align:center;">
+                            ❌ ${data.error}
+                        </div>
+                    `;
+                } else if (data.type === 'player') {
+                    const onlineClass = data.online.toLowerCase().includes('online') ? 'is-online' : '';
+                    
+                    resultsBox.innerHTML = `
+                        <article class="player-card-result">
+                            <div class="result-header">
+                                <i class="fas fa-user-shield"></i> Профиль персонажа
+                            </div>
+                            <div class="result-body">
+                                <h3>${escapeHtml(data.name)}</h3>
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-fist-raised"></i> Уровень</span>
+                                    <span class="stat-value">${escapeHtml(data.level)}</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-users"></i> Гильдия</span>
+                                    <span class="stat-value">${data.guild !== 'None' ? escapeHtml(data.guild) : 'Без гильдии'}</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-history"></i> Статус</span>
+                                    <span class="stat-value online-status ${onlineClass}">${escapeHtml(data.online)}</span>
+                                </div>
+                                ${data.born ? `
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-baby"></i> Создан</span>
+                                    <span class="stat-value">${escapeHtml(data.born)}</span>
+                                </div>` : ''}
+                                <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link">
+                                    <i class="fas fa-external-link-alt"></i> Профиль на Rucoy
+                                </a>
+                            </div>
+                        </article>
+                    `;
+                } else {
+                    // Вывод клана
+                    resultsBox.innerHTML = `
+                        <article class="player-card-result">
+                            <div class="result-header">
+                                <i class="fas fa-fort-awesome"></i> Информация о клане
+                            </div>
+                            <div class="result-body">
+                                <h3>${escapeHtml(data.name)}</h3>
+                                
+                                <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
+                                    <span class="stat-label"><i class="fas fa-scroll"></i> Описание:</span>
+                                    <span class="stat-value" style="margin-top: 5px; font-style: italic; color: #ddd;">
+                                        ${escapeHtml(data.description)}
+                                    </span>
+                                </div>
+
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-users"></i> Участников</span>
+                                    <span class="stat-value">${escapeHtml(data.members)}</span>
+                                </div>
+
+                                <div class="stat-row">
+                                    <span class="stat-label"><i class="fas fa-calendar-alt"></i> Создан</span>
+                                    <span class="stat-value">${escapeHtml(data.created_at)}</span>
+                                </div>
+
+                                <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link">
+                                    <i class="fas fa-chess-rook"></i> Страница клана
+                                </a>
+                            </div>
+                        </article>
+                    `;
+                }
+            } catch (err) {
+                resultsBox.innerHTML = `
+                    <div class="player-card-result" style="border-color: #ff4444; text-align:center;">
+                        ❌ Ошибка: Сервер не отвечает.
+                    </div>
+                `;
+                console.error('Ошибка поиска:', err);
+            }
+        }
+
+        // Защита от XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // 4. МОБИЛЬНОЕ МЕНЮ
+        // ============================================
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            const isActive = nav.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', (e) => {
+            const menu = document.querySelector('.nav-links');
+            const toggle = document.querySelector('.menu-toggle');
+            
+            if (menu.classList.contains('active') && 
+                !menu.contains(e.target) && 
+                !toggle.contains(e.target)) {
+                menu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
-    });
+    </script>
 
-    // 3. ПОИСК RUCOY ONLINE
-    async function runRucoySearch() {
-        const nameInput = document.getElementById('search-input');
-        const type = document.getElementById('search-type').value;
-        const resultsBox = document.getElementById('search-results');
-        const name = nameInput.value.trim();
-        
-        if (!name) {
-            alert("Введите имя для поиска!");
-            return;
-        }
-
-        resultsBox.style.display = 'block';
-        resultsBox.innerHTML = `
-            <div class="loading-spinner">
-                <i class="fas fa-circle-notch fa-spin fa-2x"></i><br><br>
-                Связываюсь с сервером Rucoy...
-            </div>
-        `;
-
-        try {
-            const botUrl = "https://telegram-bot-6pm1.onrender.com"; 
-            const response = await fetch(`${botUrl}/api/search?name=${encodeURIComponent(name)}&type=${type}`);
-            const data = await response.json();
-
-            if (data.error) {
-                resultsBox.innerHTML = `<div class="player-card-result" style="border-color: #ff4444; text-align:center;">❌ ${data.error}</div>`;
-            } else if (data.type === 'player') {
-                const onlineClass = data.online.toLowerCase().includes('online') ? 'is-online' : '';
-                
-                resultsBox.innerHTML = `
-                    <div class="player-card-result">
-                        <div class="result-header"><i class="fas fa-user-shield"></i> Профиль персонажа</div>
-                        <div class="result-body">
-                            <h3>${data.name}</h3>
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-fist-raised"></i> Уровень</span>
-                                <span class="stat-value">${data.level}</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-users"></i> Гильдия</span>
-                                <span class="stat-value">${data.guild !== 'None' ? data.guild : 'Без гильдии'}</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-history"></i> Статус</span>
-                                <span class="stat-value online-status ${onlineClass}">${data.online}</span>
-                            </div>
-                            ${data.born ? `
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-baby"></i> Создан</span>
-                                <span class="stat-value">${data.born}</span>
-                            </div>` : ''}
-                            <a href="${data.url}" target="_blank" class="btn-link">
-                                <i class="fas fa-external-link-alt"></i> Профиль на Rucoy
-                            </a>
-                        </div>
-                    </div>
-                `;
-            } else {
-                // ВЫВОД КЛАНА (ОБНОВЛЕННЫЙ)
-                resultsBox.innerHTML = `
-                    <div class="player-card-result">
-                        <div class="result-header"><i class="fas fa-fort-awesome"></i> Информация о клане</div>
-                        <div class="result-body">
-                            <h3>${data.name}</h3>
-                            
-                            <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
-                                <span class="stat-label"><i class="fas fa-scroll"></i> Описание:</span>
-                                <span class="stat-value" style="margin-top: 5px; font-style: italic; color: #ddd;">
-                                    ${data.description}
-                                </span>
-                            </div>
-
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-users"></i> Участников</span>
-                                <span class="stat-value">${data.members}</span>
-                            </div>
-
-                            <div class="stat-row">
-                                <span class="stat-label"><i class="fas fa-calendar-alt"></i> Создан</span>
-                                <span class="stat-value">${data.created_at}</span>
-                            </div>
-
-                            <a href="${data.url}" target="_blank" class="btn-link">
-                                <i class="fas fa-chess-rook"></i> Страница клана
-                            </a>
-                        </div>
-                    </div>
-                `;
-            }
-        } catch (err) {
-            resultsBox.innerHTML = `<div class="player-card-result" style="border-color: #ff4444; text-align:center;">❌ Ошибка: Сервер не отвечает.</div>`;
-            console.error(err);
-        }
-    }
-
-    // Поиск по нажатию Enter
-    document.getElementById('search-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            runRucoySearch();
-        }
-    });
-
-    function toggleMenu() {
-    document.querySelector('.nav-links').classList.toggle('active');
-}
-
-// Авто-закрытие после клика
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('active');
-    });
-});
-
-function toggleMenu() {
-    const nav = document.querySelector('.nav-links');
-    nav.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-}
-
-// Закрытие по клику вне меню
-document.addEventListener('click', (e) => {
-    const menu = document.querySelector('.nav-links');
-    const toggle = document.querySelector('.menu-toggle');
-    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-        menu.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-</script>
-
-<footer class="minimal-footer">
-    <div class="footer-divider"></div>
-    <p class="footer-copyright">© 2026 Bancus Rucoy</p>
-    <div class="footer-links">
-        <a href="https://t.me/Bancus_Rucoy" target="_blank" class="f-link">
-            <i class="fab fa-telegram-plane"></i> Telegram
-        </a>
-        <span class="f-separator">|</span>
-        <a href="https://discord.gg/pBmu7Q73" target="_blank" class="f-link">
-            <i class="fab fa-discord"></i> Discord
-        </a>
-    </div>
-</footer>
 </body>
 </html>
