@@ -1,62 +1,81 @@
-/* --- ЦВЕТОВЫЕ ТЕМЫ --- */
+/* ============================================
+   ЦВЕТОВЫЕ ТЕМЫ
+   ============================================ */
 
 :root {
-    --main-color: #f1c40f; /* Желтый */
+    --main-color: #f1c40f;
     --main-color-rgba: rgba(241, 196, 15, 0.5);
-    --bg-image: url('images/Drow_1.webp'); 
+    --main-color-dark: #d4a10a;
+    --bg-image: url('images/Drow_1.webp');
+    
+    /* Дополнительные цвета */
+    --text-primary: #ffffff;
+    --text-secondary: #bdc3c7;
+    --bg-dark: rgba(20, 20, 20, 0.9);
+    --bg-card: rgba(30, 30, 30, 0.85);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="green"] {
-    --main-color: #2ecc71; /* Зеленый */
+    --main-color: #2ecc71;
     --main-color-rgba: rgba(46, 204, 113, 0.5);
-    --bg-image: url('images/Dueal.jpg'); 
+    --main-color-dark: #27ae60;
+    --bg-image: url('images/Dueal.jpg');
 }
 
-/* Применяем переменные к телу сайта */
-body {
-    font-family: 'Segoe UI', sans-serif;
+/* ============================================
+   БАЗОВЫЕ СТИЛИ
+   ============================================ */
+
+* {
     margin: 0;
-    color: white;
-    /* Затемнение + Фон */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    background-color: #1a1a1a;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), var(--bg-image);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    transition: background-image 0.5s ease, color 0.3s ease;
+    transition: background-image 0.5s ease;
+    min-height: 100vh;
 }
 
-/* Привязка всех цветных элементов к переменной */
-.logo, .section-title, .scam-nickname, .hero-title, .nav-links a:hover {
-    color: var(--main-color) !important;
-}
+/* ============================================
+   HEADER И НАВИГАЦИЯ
+   ============================================ */
 
-.scam-header-icon, .btn-outline, .custom-icon, .theme-btn {
-    border-color: var(--main-color) !important;
-}
-
-.btn-main, .scam-status, .status-dot, .btn-join {
-    background-color: var(--main-color) !important;
-}
-
-/* ШАПКА И НАВИГАЦИЯ (ИСПРАВЛЕНО) */
-header {
-    background: rgba(20, 20, 20, 0.9);
-    padding: 15px 0;
+.main-header {
+    background: var(--bg-dark);
+    padding: 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* Заменил #f1c40f на переменную, чтобы полоска меняла цвет */
-    border-bottom: 2px solid var(--main-color); 
-    transition: border-color 0.3s ease;
+    border-bottom: 2px solid var(--main-color);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
 }
 
-nav {
+.main-nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    gap: 20px;
 }
 
 .logo {
@@ -64,356 +83,394 @@ nav {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    /* Тень тоже теперь зависит от темы */
+    color: var(--main-color);
     text-shadow: 0 0 10px var(--main-color-rgba);
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px var(--main-color-rgba);
+}
+
+/* Бургер меню */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.menu-toggle:hover {
+    color: var(--main-color);
+}
+
+.menu-toggle:focus {
+    outline: 2px solid var(--main-color);
+    outline-offset: 4px;
+}
+
+/* Навигационные ссылки */
 .nav-links {
     list-style: none;
     display: flex;
+    gap: 15px;
     margin: 0;
     padding: 0;
 }
 
 .nav-links li {
-    margin: 0 15px;
+    margin: 0;
 }
 
 .nav-links a {
-    color: #ecf0f1;
+    color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: block;
 }
 
-/* СТИЛИ ДЛЯ КНОПОК ПЕРЕКЛЮЧЕНИЯ (чтобы они были видны) */
-.theme-switcher {
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--main-color);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Переключатель тем */
+.theme-selection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.theme-selection i {
+    color: #666;
+    font-size: 1rem;
+}
+
+.theme-btns-container {
     display: flex;
     gap: 8px;
 }
 
-.theme-btn {
-    width: 20px;
-    height: 20px;
+.t-btn {
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
 }
 
-.theme-btn.yellow { background-color: #f1c40f; }
-.theme-btn.green { background-color: #2ecc71; }
-.theme-btn.blue { background-color: #3498db; }
+.t-btn:hover {
+    transform: scale(1.3);
+    border-color: white;
+    box-shadow: 0 0 10px currentColor;
+}
 
-/* КОНТЕНТ И СЕКЦИИ */
+.t-btn:focus {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+.t-btn.yellow { background-color: #f1c40f; }
+.t-btn.green { background-color: #2ecc71; }
+
+/* ============================================
+   ОСНОВНОЙ КОНТЕНТ
+   ============================================ */
+
+.main-content {
+    min-height: calc(100vh - 200px);
+}
+
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
-    text-align: center;
 }
 
 .content-section {
-    display: none; /* Скрыто по умолчанию */
+    display: none;
     animation: fadeIn 0.6s ease;
 }
 
 .content-section.active {
-    display: block; /* Показывается при клике */
+    display: block;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .section-title {
     font-size: 2.5rem;
-    color: #f1c40f;
+    color: var(--main-color);
     margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 0 2px 10px var(--main-color-rgba);
 }
 
 .section-subtitle {
-    color: #bdc3c7;
-    margin-bottom: 40px;
-}
-
-/* СЕТКА СКАМ-ЛИСТА */
-.scam-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.scam-card {
-    background: rgba(30, 30, 30, 0.85);
-    border: 1px solid rgba(231, 76, 60, 0.4); /* Красная рамка для скама */
-    border-radius: 15px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: 0.3s;
-}
-
-.scam-card:hover {
-    transform: scale(1.02);
-    border-color: #e74c3c;
-    box-shadow: 0 0 20px rgba(231, 76, 60, 0.2);
-}
-
-.scam-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #e74c3c;
-    flex-shrink: 0;
-}
-
-.scam-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.scam-info {
-    text-align: left;
-}
-
-.scam-info h3 {
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-.scam-info p {
-    color: #bdc3c7;
-    font-size: 0.9rem;
-    margin: 5px 0 15px 0;
-}
-
-.btn-proof {
-    display: inline-block;
-    padding: 8px 18px;
-    background: #e74c3c;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.8rem;
-    transition: 0.3s;
-}
-
-.btn-proof:hover {
-    background: #c0392b;
-    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
-}
-
-/* ФИКСИРОВАННЫЕ ИКОНКИ МЕССЕНДЖЕРОВ */
-.social-icons {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 10000;
-}
-
-.custom-icon {
-    width: 60px;  /* Размер иконки */
-    height: 60px;
-    border-radius: 50%;
-    border: 3px solid #f1c40f;
-    background: #000;
-    overflow: hidden;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
-}
-
-.custom-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.custom-icon:hover {
-    transform: scale(1.15) rotate(5deg);
-    border-color: white;
-}
-
-/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
-@media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .nav-links li {
-        margin: 0 5px;
-    }
-    .nav-links a {
-        font-size: 0.8rem;
-    }
-}
-
-/* --- СЕКЦИЯ СКАМ ЛИСТ (ОБНОВЛЕННАЯ) --- */
-
-/* Стеклянный блок вверху */
-.scam-header-box {
-    background: rgba(255, 255, 255, 0.03); /* Почти прозрачный фон */
-    backdrop-filter: blur(20px);           /* Эффект размытия фона */
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 25px;
-    padding: 50px 20px;
+    color: var(--text-secondary);
     margin-bottom: 40px;
     text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem;
 }
 
-/* Иконка Цербера (Свободная, без рамок) */
-.free-icon {
-    width: 150px;               /* Размер иконки */
-    height: auto;
-    display: block;
-    margin: 0 auto 20px auto;
-    /* Тень именно по контуру картинки (если PNG прозрачный) */
-    filter: drop-shadow(0 0 20px rgba(241, 196, 15, 0.5)); 
-    transition: transform 0.4s ease;
+/* ============================================
+   СЕКЦИЯ ПОИСКА
+   ============================================ */
+
+.search-section {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    padding: 20px;
 }
 
-.scam-header-box:hover .free-icon {
-    transform: scale(1.08) translateY(-5px); /* Легкое движение вверх при наведении */
+.search-box {
+    display: flex;
+    gap: 10px;
+    background: var(--bg-card);
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
 }
 
-.scam-header-title {
-    font-size: 2.5rem;
-    color: #f1c40f;
-    margin: 10px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-}
-
-.scam-header-subtitle {
-    color: #bdc3c7;
+.search-box select,
+.search-box input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 15px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: 300;
-}
-
-/* Список строк */
-.scam-text-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 850px;
-    margin: 0 auto;
-}
-
-.scam-text-item {
-    background: rgba(0, 0, 0, 0.5); /* Темный фон строки */
-    border-left: 4px solid #e74c3c; /* Красная метка слева */
-    padding: 15px 25px;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
 }
 
-.scam-text-item:hover {
-    background: rgba(231, 76, 60, 0.15); /* Подсветка при наведении */
-    transform: translateX(10px);        /* Сдвиг вправо */
+.search-box select {
+    min-width: 120px;
+    cursor: pointer;
 }
 
-/* Метка статуса */
-.scam-status {
-    background: #e74c3c;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 5px;
+.search-box input {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-box input:focus,
+.search-box select:focus {
+    outline: none;
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px var(--main-color-rgba);
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.search-box button {
+    background: var(--main-color);
+    border: none;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
     font-weight: bold;
-    font-size: 0.75rem;
-    margin-right: 25px;
 }
 
-/* Информация (Ник и Причина) */
-.scam-details {
-    flex-grow: 1;
-    text-align: left;
+.search-box button:hover {
+    background: var(--main-color-dark);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--main-color-rgba);
 }
 
-.scam-nickname {
-    color: #f1c40f;
-    font-weight: bold;
-    font-size: 1.15rem;
-    display: block;
+.search-box button:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
-.scam-reason {
-    color: #ecf0f1;
-    font-size: 0.95rem;
-    opacity: 0.8;
+/* Результаты поиска */
+.results-container {
+    display: none;
+    animation: slideUp 0.4s ease;
+    margin-top: 20px;
 }
 
-/* Кнопка Proofs */
-.btn-prufs-small {
-    background: transparent;
-    border: 1px solid #e74c3c;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 6px;
-    text-decoration: none;
+@keyframes slideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.player-card-result {
+    background: var(--bg-card);
+    border: 2px solid var(--main-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.result-header {
+    background: var(--main-color);
+    color: #000;
+    padding: 12px 20px;
     font-size: 0.85rem;
     font-weight: bold;
-    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.btn-prufs-small:hover {
-    background: #e74c3c;
-    box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+.result-body {
+    padding: 20px;
 }
 
-/* Контейнер для карточек */
+.result-body h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.stat-row:last-of-type {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label i {
+    color: var(--main-color);
+    width: 20px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.online-status.is-online {
+    color: #4caf50;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--main-color);
+    color: #000;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-link:hover {
+    background: var(--main-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--main-color-rgba);
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--main-color);
+}
+
+.loading-spinner i {
+    margin-bottom: 15px;
+}
+
+/* ============================================
+   СЕКЦИЯ ПАРТНЁРОВ
+   ============================================ */
+
+.partners-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 .partners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    justify-items: center;
-    margin-top: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-/* Карточка в стиле Discord */
 .partner-card {
-    background: #2f3136; /* Цвет фона Discord */
-    width: 300px;
-    border-radius: 8px;
+    background: #2f3136;
+    border-radius: 12px;
     overflow: hidden;
-    position: relative;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
 }
 
 .partner-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* Баннер (верхняя полоска карточки) */
+.partner-card:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
 .partner-banner {
-    background: #5865f2; /* Цвет Blurple или можно поставить картинку */
     height: 60px;
     width: 100%;
 }
 
-/* Контент внутри карточки */
 .partner-content {
     padding: 16px;
-    padding-top: 40px; /* Место для аватара, который вылезает вверх */
+    padding-top: 50px;
     position: relative;
-    text-align: left;
 }
 
-/* Круглая аватарка, перекрывающая баннер */
 .partner-avatar {
     width: 80px;
     height: 80px;
@@ -422,7 +479,8 @@ nav {
     position: absolute;
     top: -40px;
     left: 16px;
-    padding: 5px; /* Чтобы был эффект ободка */
+    padding: 5px;
+    box-shadow: var(--shadow-md);
 }
 
 .partner-avatar img {
@@ -433,7 +491,7 @@ nav {
 }
 
 .partner-name {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 1.2rem;
     color: #fff;
 }
@@ -441,175 +499,226 @@ nav {
 .partner-desc {
     color: #b9bbbe;
     font-size: 0.9rem;
-    margin: 10px 0 20px 0;
-    height: 40px; /* Ограничение высоты текста */
+    margin: 0 0 20px 0;
+    min-height: 50px;
 }
 
-/* Нижняя часть с кнопкой */
 .partner-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
 }
 
 .online-status {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #b9bbbe;
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 .status-dot {
     width: 10px;
     height: 10px;
-    background: #3ba55c; /* Зеленый как в Discord */
+    background: #3ba55c;
     border-radius: 50%;
-    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 .btn-join {
     background: #3ba55c;
     color: white;
     text-decoration: none;
-    padding: 6px 16px;
-    border-radius: 4px;
+    padding: 8px 18px;
+    border-radius: 6px;
     font-size: 0.9rem;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
 }
 
 .btn-join:hover {
     background: #2d7d44;
+    transform: scale(1.05);
 }
 
-    .player-card-result {
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid var(--main-color);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 20px;
-    animation: slideUp 0.4s ease;
-}
+/* ============================================
+   СЕКЦИЯ СКАМЕРОВ
+   ============================================ */
 
-.result-header {
-    background: var(--main-color);
-    color: black;
-    padding: 5px 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.result-body {
-    padding: 15px;
-}
-
-.result-body h3 {
-    margin: 0 0 10px 0;
-    color: var(--main-color);
-}
-
-.result-body p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-}
-
-.result-body p span {
-    color: #888;
-}
-
-.loading-spinner {
-    color: var(--main-color);
+.scam-header-box {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    padding: 50px 20px;
+    margin-bottom: 40px;
     text-align: center;
-    padding: 20px;
+    box-shadow: var(--shadow-lg);
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.free-icon {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+    filter: drop-shadow(0 0 20px var(--main-color-rgba));
+    transition: transform 0.4s ease;
 }
 
-/* Анимация появления */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.scam-header-box:hover .free-icon {
+    transform: scale(1.08) translateY(-5px);
 }
 
-.results-container {
-    display: none; /* Скрыто до поиска */
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Переопределяем стили карточки результата */
-.player-card-result {
-    background: #2d2d2d;
-    border: 2px solid #4a90e2;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    max-width: 450px;
-    margin: 20px auto;
-    overflow: hidden;
-}
-
-.result-header {
+.scam-header-title {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    margin: 10px 0;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    color: #4a90e2;
-    border-bottom: 1px solid #444;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-.result-body h3 {
-    margin: 0 0 15px 0;
-    font-size: 1.5rem;
-    color: #fff;
+.scam-header-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.scam-text-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.scam-text-item {
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 4px solid #e74c3c;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
 }
 
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px dashed #444;
+.scam-text-item:hover {
+    background: rgba(231, 76, 60, 0.15);
+    transform: translateX(10px);
+    border-left-width: 6px;
 }
 
-.stat-row i {
-    color: #4a90e2;
-    width: 20px;
+.scam-status {
+    background: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.stat-label {
-    color: #aaa;
+.scam-details {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.scam-nickname {
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.scam-reason {
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
-.stat-value {
-    font-weight: 600;
+.btn-prufs-small {
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.online-status.is-online {
-    color: #4caf50;
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+.btn-prufs-small:hover {
+    background: #e74c3c;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+    transform: scale(1.05);
 }
 
-.loading-spinner {
+/* ============================================
+   СЕКЦИИ В РАЗРАБОТКЕ
+   ============================================ */
+
+.gold-placeholder,
+.giveaway-placeholder {
     text-align: center;
-    padding: 20px;
-    color: #4a90e2;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px dashed var(--border-color);
 }
+
+.gold-placeholder p,
+.giveaway-placeholder p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* ============================================
+   ПРИВЕТСТВЕННАЯ СЕКЦИЯ
+   ============================================ */
+
+.welcome-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px var(--main-color-rgba);
+}
+
+.welcome-section p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
 
 .minimal-footer {
     padding: 40px 20px;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 80px;
+    border-top: 1px solid var(--border-color);
 }
 
 .footer-divider {
@@ -621,8 +730,8 @@ nav {
 
 .footer-copyright {
     color: #666;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
     letter-spacing: 1px;
 }
 
@@ -631,24 +740,24 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .f-link {
     color: #888;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: 0.3s;
-    display: flex;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-}
-
-.f-link i {
-    font-size: 1rem;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
 .f-link:hover {
-    color: var(--main-color); /* Подсветится твоим желтым/зеленым */
+    color: var(--main-color);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .f-separator {
@@ -656,117 +765,559 @@ nav {
     user-select: none;
 }
 
-/* На мобилках делаем текст чуть крупнее для удобства нажатия */
-@media (max-width: 600px) {
-    .f-link {
-        font-size: 1rem;
-        padding: 10px;
+/* ============================================
+   АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ
+   ============================================ */
+
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .scam-header-title {
+        font-size: 2rem;
+    }
+    
+    .welcome-section h1 {
+        font-size: 2rem;
     }
 }
 
-/* Контейнер переключателя */
-.theme-selection {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* ============================================
+   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Навигация */
+    .main-nav {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+    
+    .menu-toggle {
+        display: block;
+        order: 2;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--bg-dark);
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        gap: 0;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .nav-links a {
+        padding: 15px 10px;
+        font-size: 1.1rem;
+    }
+    
+    .theme-selection {
+        order: 3;
+        margin-left: auto;
+        padding: 6px 10px;
+    }
+    
+    .theme-selection i {
+        font-size: 0.9rem;
+    }
+    
+    .t-btn {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Поиск */
+    .search-section {
+        padding: 15px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+        padding: 12px;
+    }
+    
+    .search-box select,
+    .search-box input,
+    .search-box button {
+        width: 100%;
+    }
+    
+    /* Заголовки */
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Партнёры */
+    .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .partner-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Скамеры */
+    .scam-header-box {
+        padding: 30px 15px;
+    }
+    
+    .scam-header-title {
+        font-size: 1.6rem;
+    }
+    
+    .free-icon {
+        max-width: 120px;
+    }
+    
+    .scam-text-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    
+    .scam-text-item:hover {
+        transform: translateX(5px);
+    }
+    
+    .scam-status {
+        align-self: flex-start;
+    }
+    
+    .btn-prufs-small {
+        align-self: stretch;
+        text-align: center;
+    }
+    
+    /* Результаты поиска */
+    .player-card-result {
+        margin: 15px 0;
+    }
+    
+    .result-body {
+        padding: 15px;
+    }
+    
+    .stat-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 10px 0;
+    }
+    
+    .stat-value {
+        padding-left: 28px;
+    }
+    
+    /* Footer */
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .f-separator {
+        display: none;
+    }
+    
+    .f-link {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+    
+    /* Контейнеры */
+    .container {
+        margin: 30px auto;
+        padding: 15px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .welcome-section p {
+        font-size: 1rem;
+    }
 }
 
-.theme-btns-container {
+/* ============================================
+   АДАПТАЦИЯ ДЛЯ МАЛЕНЬКИХ ТЕЛЕФОНОВ
+   ============================================ */
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .scam-header-title {
+        font-size: 1.4rem;
+    }
+    
+    .welcome-section h1 {
+        font-size: 1.5rem;
+    }
+    
+    .result-body h3 {
+        font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/* ============================================
+   УЛУЧШЕНИЯ ПРОИЗВОДИТЕЛЬНОСТИ
+   ============================================ */
+
+/* Оптимизация анимаций для слабых устройств */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Улучшение читаемости текста */
+@media (max-width: 768px) {
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Скрытие элементов при печати */
+@media print {
+    .main-header,
+    .search-section,
+    .minimal-footer,
+    .theme-selection {
+        display: none;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Фокус для клавиатурной навигации */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
+/* Улучшение контрастности для людей с нарушениями зрения */
+@media (prefers-contrast: high) {
+    :root {
+        --text-secondary: #ffffff;
+        --border-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Скрытие элементов только визуально (для screen readers) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ============================================
+   КАЛЬКУЛЯТОР СТИЛИ
+   ============================================ */
+
+.calc-header-main {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Табы калькулятора */
+.calc-tabs-container {
     display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.calc-tab-btn {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-tab-btn:hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+    transform: translateY(-2px);
+}
+
+.calc-tab-btn.active {
+    background: var(--main-color);
+    color: #000;
+    border-color: var(--main-color);
+    box-shadow: 0 5px 15px var(--main-color-rgba);
+}
+
+/* Контент табов калькулятора */
+.calc-tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.calc-tab-content.active {
+    display: block;
+}
+
+/* Карточки калькулятора */
+.calc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.calc-card h3 {
+    color: var(--main-color);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-/* Сами кнопки-точки */
-.t-btn {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+/* Кнопка расчёта */
+.calc-btn {
+    background: var(--main-color);
+    border: none;
+    color: #000;
+    padding: 15px 40px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
-    padding: 0;
-}
-
-.t-btn:hover {
-    transform: scale(1.3);
-    border-color: white;
-}
-
-.t-btn.yellow { background-color: #f1c40f; }
-.t-btn.green { background-color: #2ecc71; }
-
-/* Адаптация для мобилок: в навигации скрываем лишнее */
-@media (max-width: 600px) {
-    nav {
-        flex-wrap: wrap; /* Позволяет логотипу и теме быть в одной строке */
-        gap: 10px;
-    }
-    .theme-selection {
-        order: 2; /* Ставим переключатель после логотипа */
-        padding: 4px 8px;
-    }
-    .nav-links {
-        order: 3; /* Ссылки меню уходят вниз */
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-    }
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.calc-btn:hover {
+    background: var(--main-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px var(--main-color-rgba);
+}
+
+.calc-btn:active {
+    transform: translateY(0);
+}
+
+/* Результаты калькулятора */
+.calc-results-container {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--main-color);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+    display: none;
+}
+
+.calc-results-container.show {
+    display: block;
+    animation: slideUp 0.5s ease;
+}
+
+.result-title {
+    color: var(--main-color);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.result-item {
+    background: rgba(255, 255, 255, 0.03);
     padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--main-color);
+}
+
+.result-item label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.result-item .value {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.result-item.success {
+    border-left-color: #2ecc71;
+}
+
+.result-item.danger {
+    border-left-color: #e74c3c;
+}
+
+.result-item.warning {
+    border-left-color: #f39c12;
+}
+
+/* Текстовые результаты */
+.text-result {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    white-space: pre-line;
+    line-height: 1.8;
+}
+
+/* Прогресс бар для прокачки */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px 0;
     position: relative;
 }
 
-.menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: white;
-}
-
-.nav-links {
+.progress-fill {
+    background: linear-gradient(90deg, var(--main-color), #2ecc71);
+    height: 100%;
+    border-radius: 15px;
+    transition: width 1s ease;
     display: flex;
-    gap: 15px;
-    list-style: none;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.85rem;
 }
 
+/* Предупреждения */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert.info {
+    background: rgba(52, 152, 219, 0.2);
+    border-left: 4px solid #3498db;
+    color: #ecf0f1;
+}
+
+.alert.warning {
+    background: rgba(243, 156, 18, 0.2);
+    border-left: 4px solid #f39c12;
+    color: #ecf0f1;
+}
+
+.alert.success {
+    background: rgba(46, 204, 113, 0.2);
+    border-left: 4px solid #2ecc71;
+    color: #ecf0f1;
+}
+
+.alert.danger {
+    background: rgba(231, 76, 60, 0.2);
+    border-left: 4px solid #e74c3c;
+    color: #ecf0f1;
+}
+
+/* Адаптация калькулятора для мобильных */
 @media (max-width: 768px) {
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #1f1f1f;
+    .calc-tabs-container {
         flex-direction: column;
+    }
+
+    .calc-tab-btn {
         width: 100%;
+        justify-content: center;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-card {
         padding: 15px;
-        display: none;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .theme-selection {
-        display: none; /* чтобы не ломало мобильную версию */
     }
 }
 
-.partner-card {
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.partner-card:active {
-    transform: scale(0.97);
-}

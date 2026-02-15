@@ -26,6 +26,7 @@
 
             <ul class="nav-links">
                 <li><a href="#home">Главная</a></li>
+                <li><a href="#calculator">Калькулятор</a></li>
                 <li><a href="#partners">Партнёры</a></li>
                 <li><a href="#scam-list">Скамеры</a></li>
                 <li><a href="#gold">Gold</a></li>
@@ -125,6 +126,232 @@
                         </div>
                     </article>
                 </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ: КАЛЬКУЛЯТОР -->
+        <section id="calculator" class="content-section">
+            <div class="container">
+                <div class="calc-header-main">
+                    <h2 class="section-title"><i class="fas fa-calculator"></i> Калькулятор Rucoy Online</h2>
+                    <p class="section-subtitle">Расчёт урона, защиты, прокачки и проверка One-Shot возможностей</p>
+                </div>
+
+                <!-- Табы калькулятора -->
+                <div class="calc-tabs-container">
+                    <button class="calc-tab-btn active" onclick="switchCalcTab('damage')">
+                        <i class="fas fa-fist-raised"></i> Damage
+                    </button>
+                    <button class="calc-tab-btn" onclick="switchCalcTab('online')">
+                        <i class="fas fa-wifi"></i> Online Train
+                    </button>
+                    <button class="calc-tab-btn" onclick="switchCalcTab('power')">
+                        <i class="fas fa-bolt"></i> Power Train
+                    </button>
+                    <button class="calc-tab-btn" onclick="switchCalcTab('offline')">
+                        <i class="fas fa-clock"></i> Offline Train
+                    </button>
+                    <button class="calc-tab-btn" onclick="switchCalcTab('skull')">
+                        <i class="fas fa-skull"></i> Skull
+                    </button>
+                </div>
+
+                <!-- ТАБА: УРОН (остаётся как есть) -->
+                <div id="calc-damage-tab" class="calc-tab-content active">
+                    <div class="calc-card">
+                        <h3><i class="fas fa-sword"></i> Калькулятор урона</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Уровень персонажа</label>
+                                <input type="number" id="dmg-base" placeholder="100" min="1" max="700">
+                            </div>
+                            <div class="form-group">
+                                <label>Стат (Stats)</label>
+                                <input type="number" id="dmg-stat" placeholder="200" min="5" max="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Атака оружия</label>
+                                <input type="number" id="dmg-weapon" placeholder="50" min="0" max="200">
+                            </div>
+                            <div class="form-group">
+                                <label>Тип атаки</label>
+                                <select id="dmg-atktype">
+                                    <option value="0">Auto атака</option>
+                                    <option value="1">⚔️ Special (Mele | Dist)</option>
+                                    <option value="2">🪄 Special (Mage)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Моб</label>
+                                <select id="dmg-mob"></select>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="dmg-crit-ring">
+                            <label for="dmg-crit-ring">Spiked Ring (Crit Ring)</label>
+                        </div>
+
+                        <button class="calc-btn" onclick="calculateDamage()">
+                            <i class="fas fa-calculator"></i> Рассчитать урон
+                        </button>
+
+                        <div id="damage-results" class="calc-results-container"></div>
+                    </div>
+                </div>
+
+                <!-- ТАБА: ONLINE TRAINING -->
+                <div id="calc-online-tab" class="calc-tab-content">
+                    <div class="calc-card">
+                        <h3><i class="fas fa-wifi"></i> Online Training</h3>
+                        
+                        <div class="alert info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Калькулятор автоматически подберёт оптимального моба для прокачки</span>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Уровень базы</label>
+                                <input type="number" id="online-base" placeholder="100" min="1" max="700">
+                            </div>
+                            <div class="form-group">
+                                <label>Стат (с баффами)</label>
+                                <input type="number" id="online-stat" placeholder="200" min="5" max="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Атака оружия</label>
+                                <input type="number" id="online-weapon" placeholder="50" min="0" max="200">
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="online-crit-ring">
+                            <label for="online-crit-ring">Spiked Ring (Crit Ring)</label>
+                        </div>
+
+                        <button class="calc-btn" onclick="calculateOnlineTraining()">
+                            <i class="fas fa-search"></i> Найти моба для прокачки
+                        </button>
+
+                        <div id="online-results" class="calc-results-container"></div>
+                    </div>
+                </div>
+
+                <!-- ТАБА: POWER TRAINING -->
+                <div id="calc-power-tab" class="calc-tab-content">
+                    <div class="calc-card">
+                        <h3><i class="fas fa-bolt"></i> Power Training</h3>
+                        
+                        <div class="alert warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Power training — это когда вы бьёте способностью персонажа по нескольким мобам сразу</span>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Уровень (LVL)</label>
+                                <input type="number" id="power-base" placeholder="100" min="1" max="700">
+                            </div>
+                            <div class="form-group">
+                                <label>Стат (с баффами)</label>
+                                <input type="number" id="power-stat" placeholder="200" min="5" max="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Атака оружия</label>
+                                <input type="number" id="power-weapon" placeholder="50" min="0" max="200">
+                            </div>
+                            <div class="form-group">
+                                <label>Класс</label>
+                                <select id="power-class">
+                                    <option value="0">⚔️ Melee</option>
+                                    <option value="1">🏹 Distance</option>
+                                    <option value="2">🪄 Magic</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tick (кол-во мобов)</label>
+                                <input type="number" id="power-tick" placeholder="4" min="1" max="10" value="4">
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="power-crit-ring">
+                            <label for="power-crit-ring">Spiked Ring (Crit Ring)</label>
+                        </div>
+
+                        <button class="calc-btn" onclick="calculatePowerTraining()">
+                            <i class="fas fa-bolt"></i> Найти моба для Power Train
+                        </button>
+
+                        <div id="power-results" class="calc-results-container"></div>
+                    </div>
+                </div>
+
+                <!-- ТАБА: OFFLINE TRAINING -->
+                <div id="calc-offline-tab" class="calc-tab-content">
+                    <div class="calc-card">
+                        <h3><i class="fas fa-clock"></i> Offline Training</h3>
+                        
+                        <div class="alert info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Рассчитайте сколько времени нужно для прокачки через dummy (600 опыта/час)</span>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Текущий стат</label>
+                                <input type="number" id="offline-current" placeholder="100" min="5" max="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Целевой стат</label>
+                                <input type="number" id="offline-goal" placeholder="200" min="5" max="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Часы тренировки</label>
+                                <input type="number" id="offline-hours" placeholder="24" min="0.1" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="alert warning">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Заполните ЛИБО целевой стат, ЛИБО часы</strong> (не обязательно оба сразу)</span>
+                        </div>
+
+                        <button class="calc-btn" onclick="calculateOfflineTraining()">
+                            <i class="fas fa-calculator"></i> Рассчитать Offline Train
+                        </button>
+
+                        <div id="offline-results" class="calc-results-container"></div>
+                    </div>
+                </div>
+
+                <!-- ТАБА: SKULL -->
+                <div id="calc-skull-tab" class="calc-tab-content">
+                    <div class="calc-card">
+                        <h3><i class="fas fa-skull"></i> Информация о персонаже</h3>
+                        
+                        <div class="alert info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Узнайте свои HP/MP, опыт и стоимость черепов</span>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Уровень (LVL)</label>
+                                <input type="number" id="skull-base" placeholder="100" min="1" max="700">
+                            </div>
+                        </div>
+
+                        <button class="calc-btn" onclick="calculateSkull()">
+                            <i class="fas fa-calculator"></i> Рассчитать характеристики
+                        </button>
+
+                        <div id="skull-results" class="calc-results-container"></div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -466,6 +693,9 @@
             }
         });
     </script>
+
+    <!-- CALCULATOR SCRIPT -->
+    <script src="calculator.js"></script>
 
 </body>
 </html>
