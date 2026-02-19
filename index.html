@@ -1,82 +1,265 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bancus Rucoy — поиск игроков и кланов Rucoy Online, проверенные партнёры, база скамеров и актуальные цены на gold">
-    <meta name="keywords" content="Rucoy Online, Bancus, поиск игроков, кланы, gold, скамеры">
+    <meta name="description" content="Bancus Rucoy — поиск игроков, Wiki, новости, партнёры и база скамеров">
     <meta name="theme-color" content="#f1c40f">
-    <title>Bancus Rucoy — Поиск игроков, партнёры и база скамеров</title>
-    
+    <title>Bancus Rucoy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="main-header">
-        <nav class="main-nav">
-            <div class="logo">Bancus Rucoy</div>
+<!-- HEADER -->
+<header class="main-header">
+    <nav class="main-nav">
+        <div class="logo">&gt; BANCUS_</div>
 
-            <!-- Бургер кнопка -->
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Открыть меню">
-                <i class="fas fa-bars"></i>
-            </button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+        </button>
 
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#calculator">Калькулятор</a></li>
-                <li><a href="#partners">Партнёры</a></li>
-                <li><a href="#scam-list">Скамеры</a></li>
-                <li><a href="#gold">Gold</a></li>
-                <li><a href="#giveaways">Розыгрыши</a></li>
-            </ul>
-            
-            <!-- Переключатель тем -->
-            <div class="theme-selection" aria-label="Выбор темы оформления">
-                <i class="fas fa-palette" aria-hidden="true"></i>
-                <div class="theme-btns-container">
-                    <button class="t-btn yellow" onclick="setTheme('default')" aria-label="Жёлтая тема" title="Жёлтая тема"></button>
-                    <button class="t-btn green" onclick="setTheme('green')" aria-label="Зелёная тема" title="Зелёная тема"></button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">[ HOME ]</a></li>
+            <li><a href="#calculator">[ CALC ]</a></li>
+            <li><a href="#partners">[ Partners ]</a></li>
+            <li><a href="#scam-list">[ SCAMERS ]</a></li>
+            <li><a href="#gold">[ GOLD ]</a></li>
+            <li><a href="#giveaways">[ GIWEYS ]</a></li>
+            <li><a href="#news">[ NEWS ]</a></li>
+            <li><a href="#wiki">[ WIKI ]</a></li>
+        </ul>
+
+        <div class="theme-selection">
+            <i class="fas fa-palette"></i>
+            <div class="theme-btns-container">
+                <button class="t-btn yellow" onclick="setTheme('default')" title="Жёлтая тема"></button>
+                <button class="t-btn green" onclick="setTheme('green')" title="Зелёная тема"></button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <!-- HOME -->
+<section id="home" class="content-section active">
+     <div class="container welcome-section" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <img src="images/12dd6b0b-6cbc-4dba-8dc4-72c564bec735-removebg-preview.png" alt="Search" class="section-icon" style="width: 64px; height: 64px;">
+        <div style="text-align: left;">
+            <h1 style="margin-bottom: 5px;">BANCUS RUCOY</h1>
+            <p style="margin: 0;">Ваш проводник в мире Rucoy Online</p>
+        </div>
+    </div>
+</section>
+    <div class="search-section">
+        <form class="search-box" onsubmit="event.preventDefault(); runRucoySearch();">
+            <select id="search-type" aria-label="Тип поиска">
+                <option value="player">PLAYER</option>
+                <option value="guild">GUILD</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Enter name..." autocomplete="off" aria-label="Поиск">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div id="search-results" class="results-container" role="region" aria-live="polite"></div>
+    </div>
+    
+    <!-- CALCULATOR -->
+    <section id="calculator" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">CALCULATOR</h2>
+                    <p class="section-subtitle">Расчёт урона, прокачки и характеристик</p>
                 </div>
             </div>
-        </nav>
-    </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-        
-        <!-- СЕКЦИЯ: ГЛАВНАЯ -->
-        <section id="home" class="content-section active">
-            <div class="search-section">
-                <form class="search-box" onsubmit="event.preventDefault(); runRucoySearch();">
-                    <select id="search-type" aria-label="Тип поиска">
-                        <option value="player">Игрок</option>
-                        <option value="guild">Клан</option>
-                    </select>
-                    <input 
-                        type="text" 
-                        id="search-input" 
-                        placeholder="Введите ник или название..." 
-                        aria-label="Поле поиска"
-                        autocomplete="off"
-                    >
-                    <button type="submit" aria-label="Найти">
-                        <i class="fas fa-search"></i>
+            <div class="calc-tabs-container">
+                <button class="calc-tab-btn active" onclick="switchCalcTab(event,'damage')">💥 Урон</button>
+                <button class="calc-tab-btn" onclick="switchCalcTab(event,'online')">🌐 Online Train</button>
+                <button class="calc-tab-btn" onclick="switchCalcTab(event,'power')">⚡ Power Train</button>
+                <button class="calc-tab-btn" onclick="switchCalcTab(event,'offline')">💤 Offline Train</button>
+                <button class="calc-tab-btn" onclick="switchCalcTab(event,'skull')">💀 Skull</button>
+            </div>
+
+            <!-- УРОН -->
+            <div id="calc-damage-tab" class="calc-tab-content active">
+                <div class="calc-card">
+                    <h3><i class="fas fa-fist-raised"></i> Калькулятор урона</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Base Level</label>
+                            <input type="number" id="dmg-base" placeholder="100" min="1" max="700">
+                        </div>
+                        <div class="form-group">
+                            <label>Stat Level (с баффами)</label>
+                            <input type="number" id="dmg-stat" placeholder="200" min="5" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Weapon Attack</label>
+                            <input type="number" id="dmg-weapon" placeholder="50" min="0" max="200">
+                        </div>
+                        <div class="form-group">
+                            <label>Attack Type</label>
+                            <select id="dmg-atktype">
+                                <option value="0">Auto attack</option>
+                                <option value="1">⚔️ Special Melee</option>
+                                <option value="2">🏹 Special Distance</option>
+                                <option value="3">🪄 Special Magic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mob</label>
+                            <select id="dmg-mob"></select>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="dmg-crit-ring">
+                        <label for="dmg-crit-ring">Use Spiked Ring (Crit hit prob. & dmg up)</label>
+                    </div>
+                    <button class="calc-btn" onclick="calculateDamage()">
+                        <i class="fas fa-calculator"></i> CALCULATE DAMAGE
                     </button>
-                </form>
-                <div id="search-results" class="results-container" role="region" aria-live="polite"></div>
+                    <div id="damage-results" class="calc-results-container"></div>
+                </div>
             </div>
-            
-            <div class="container welcome-section">
-                <h1>Добро пожаловать в Bancus Rucoy</h1>
-                <p>Ваш надёжный проводник в мире Rucoy Online. Используйте меню для навигации по разделам.</p>
-            </div>
-        </section>
 
-        <!-- СЕКЦИЯ: ПАРТНЁРЫ -->
-        <section id="partners" class="content-section">
+            <!-- ONLINE TRAIN -->
+            <div id="calc-online-tab" class="calc-tab-content">
+                <div class="calc-card">
+                    <h3><i class="fas fa-wifi"></i> Online Training</h3>
+                    <div class="alert info">
+                        <i class="fas fa-info-circle"></i>
+                        Калькулятор автоматически подберёт моба для эффективной прокачки
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Base Level</label>
+                            <input type="number" id="online-base" placeholder="100" min="1" max="700">
+                        </div>
+                        <div class="form-group">
+                            <label>Stat Level (с баффами)</label>
+                            <input type="number" id="online-stat" placeholder="200" min="5" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Weapon Attack</label>
+                            <input type="number" id="online-weapon" placeholder="50" min="0" max="200">
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="online-crit-ring">
+                        <label for="online-crit-ring">Use Spiked Ring</label>
+                    </div>
+                    <button class="calc-btn" onclick="calculateOnlineTraining()">
+                        <i class="fas fa-search"></i> FIND MOB
+                    </button>
+                    <div id="online-results" class="calc-results-container"></div>
+                </div>
+            </div>
+
+            <!-- POWER TRAIN -->
+            <div id="calc-power-tab" class="calc-tab-content">
+                <div class="calc-card">
+                    <h3><i class="fas fa-bolt"></i> Power Training</h3>
+                    <div class="alert warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Power training — Special атака по нескольким мобам одновременно
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Base Level</label>
+                            <input type="number" id="power-base" placeholder="100" min="1" max="700">
+                        </div>
+                        <div class="form-group">
+                            <label>Stat Level (с баффами)</label>
+                            <input type="number" id="power-stat" placeholder="200" min="5" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Weapon Attack</label>
+                            <input type="number" id="power-weapon" placeholder="50" min="0" max="200">
+                        </div>
+                        <div class="form-group">
+                            <label>Class</label>
+                            <select id="power-class">
+                                <option value="0">⚔️ Melee</option>
+                                <option value="1">🏹 Distance</option>
+                                <option value="2">🪄 Magic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tick (кол-во мобов, default 4)</label>
+                            <input type="number" id="power-tick" placeholder="4" min="1" max="10" value="4">
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="power-crit-ring">
+                        <label for="power-crit-ring">Use Spiked Ring</label>
+                    </div>
+                    <button class="calc-btn" onclick="calculatePowerTraining()">
+                        <i class="fas fa-bolt"></i> FIND MOB FOR POWER TRAIN
+                    </button>
+                    <div id="power-results" class="calc-results-container"></div>
+                </div>
+            </div>
+
+            <!-- OFFLINE TRAIN -->
+            <div id="calc-offline-tab" class="calc-tab-content">
+                <div class="calc-card">
+                    <h3><i class="fas fa-clock"></i> Offline Training</h3>
+                    <div class="alert info">
+                        <i class="fas fa-info-circle"></i>
+                        Прокачка через dummy — 600 exp/час. Заполните ЛИБО целевой стат, ЛИБО часы.
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Текущий стат</label>
+                            <input type="number" id="offline-current" placeholder="100" min="5" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Целевой стат (или пусто)</label>
+                            <input type="number" id="offline-goal" placeholder="200" min="5" max="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Часы тренировки (или пусто)</label>
+                            <input type="number" id="offline-hours" placeholder="24" min="0.1" step="0.1">
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateOfflineTraining()">
+                        <i class="fas fa-calculator"></i> CALCULATE
+                    </button>
+                    <div id="offline-results" class="calc-results-container"></div>
+                </div>
+            </div>
+
+            <!-- SKULL -->
+            <div id="calc-skull-tab" class="calc-tab-content">
+                <div class="calc-card">
+                    <h3><i class="fas fa-skull"></i> Skull & Stats Info</h3>
+                    <div class="alert info">
+                        <i class="fas fa-info-circle"></i>
+                        Введите уровень персонажа — получите HP/MP, опыт и стоимость черепов
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Base Level</label>
+                            <input type="number" id="skull-base" placeholder="100" min="1" max="700">
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateSkull()">
+                        <i class="fas fa-skull"></i> SHOW STATS
+                    </button>
+                    <div id="skull-results" class="calc-results-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS -->
+      <section id="partners" class="content-section">
             <div class="container">
                 <div class="partners-header">
                     <h2 class="section-title">Наши Партнёры</h2>
@@ -96,7 +279,7 @@
                             
                             <div class="partner-footer">
                                 <div class="online-status">
-                                    <span class="status-dot" aria-hidden="true"></span> 24/7 Активен
+                                    <span class="status-dot" aria-hidden="true"></span> Telegram
                                 </div>
                                 <a href="https://t.me/Rucoy_shop1" target="_blank" rel="noopener noreferrer" class="btn-join">
                                     Перейти
@@ -117,9 +300,9 @@
                             
                             <div class="partner-footer">
                                 <div class="online-status">
-                                    <span class="status-dot" aria-hidden="true"></span> 24/7 Активен
+                                    <span class="status-dot" aria-hidden="true"></span> Telegram
                                 </div>
-                                <a href="https://t.me/korovka222chat" target="_blank" rel="noopener noreferrer" class="btn-join" style="background: #a18cd1;">
+                                <a href="https://t.me/korovka222chat" target="_blank" rel="noopener noreferrer" class="btn-join">
                                     Перейти
                                 </a>
                             </div>
@@ -129,573 +312,601 @@
             </div>
         </section>
 
-        <!-- СЕКЦИЯ: КАЛЬКУЛЯТОР -->
-        <section id="calculator" class="content-section">
-            <div class="container">
-                <div class="calc-header-main">
-                    <h2 class="section-title"><i class="fas fa-calculator"></i> Калькулятор Rucoy Online</h2>
-                    <p class="section-subtitle">Расчёт урона, защиты, прокачки и проверка One-Shot возможностей</p>
-                </div>
-
-                <!-- Табы калькулятора -->
-                <div class="calc-tabs-container">
-                    <button class="calc-tab-btn active" onclick="switchCalcTab('damage')">
-                        <i class="fas fa-fist-raised"></i> Damage
-                    </button>
-                    <button class="calc-tab-btn" onclick="switchCalcTab('online')">
-                        <i class="fas fa-wifi"></i> Online Train
-                    </button>
-                    <button class="calc-tab-btn" onclick="switchCalcTab('power')">
-                        <i class="fas fa-bolt"></i> Power Train
-                    </button>
-                    <button class="calc-tab-btn" onclick="switchCalcTab('offline')">
-                        <i class="fas fa-clock"></i> Offline Train
-                    </button>
-                    <button class="calc-tab-btn" onclick="switchCalcTab('skull')">
-                        <i class="fas fa-skull"></i> Skull
-                    </button>
-                </div>
-
-                <!-- ТАБА: УРОН (остаётся как есть) -->
-                <div id="calc-damage-tab" class="calc-tab-content active">
-                    <div class="calc-card">
-                        <h3><i class="fas fa-sword"></i> Калькулятор урона</h3>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Уровень персонажа</label>
-                                <input type="number" id="dmg-base" placeholder="100" min="1" max="700">
-                            </div>
-                            <div class="form-group">
-                                <label>Стат (Stats)</label>
-                                <input type="number" id="dmg-stat" placeholder="200" min="5" max="1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Атака оружия</label>
-                                <input type="number" id="dmg-weapon" placeholder="50" min="0" max="200">
-                            </div>
-                            <div class="form-group">
-                                <label>Тип атаки</label>
-                                <select id="dmg-atktype">
-                                    <option value="0">Auto атака</option>
-                                    <option value="1">⚔️ Special (Mele | Dist)</option>
-                                    <option value="2">🪄 Special (Mage)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Моб</label>
-                                <select id="dmg-mob"></select>
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="dmg-crit-ring">
-                            <label for="dmg-crit-ring">Spiked Ring (Crit Ring)</label>
-                        </div>
-
-                        <button class="calc-btn" onclick="calculateDamage()">
-                            <i class="fas fa-calculator"></i> Рассчитать урон
-                        </button>
-
-                        <div id="damage-results" class="calc-results-container"></div>
-                    </div>
-                </div>
-
-                <!-- ТАБА: ONLINE TRAINING -->
-                <div id="calc-online-tab" class="calc-tab-content">
-                    <div class="calc-card">
-                        <h3><i class="fas fa-wifi"></i> Online Training</h3>
-                        
-                        <div class="alert info">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Калькулятор автоматически подберёт оптимального моба для прокачки</span>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Уровень базы</label>
-                                <input type="number" id="online-base" placeholder="100" min="1" max="700">
-                            </div>
-                            <div class="form-group">
-                                <label>Стат (с баффами)</label>
-                                <input type="number" id="online-stat" placeholder="200" min="5" max="1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Атака оружия</label>
-                                <input type="number" id="online-weapon" placeholder="50" min="0" max="200">
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="online-crit-ring">
-                            <label for="online-crit-ring">Spiked Ring (Crit Ring)</label>
-                        </div>
-
-                        <button class="calc-btn" onclick="calculateOnlineTraining()">
-                            <i class="fas fa-search"></i> Найти моба для прокачки
-                        </button>
-
-                        <div id="online-results" class="calc-results-container"></div>
-                    </div>
-                </div>
-
-                <!-- ТАБА: POWER TRAINING -->
-                <div id="calc-power-tab" class="calc-tab-content">
-                    <div class="calc-card">
-                        <h3><i class="fas fa-bolt"></i> Power Training</h3>
-                        
-                        <div class="alert warning">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>Power training — это когда вы бьёте способностью персонажа по нескольким мобам сразу</span>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Уровень (LVL)</label>
-                                <input type="number" id="power-base" placeholder="100" min="1" max="700">
-                            </div>
-                            <div class="form-group">
-                                <label>Стат (с баффами)</label>
-                                <input type="number" id="power-stat" placeholder="200" min="5" max="1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Атака оружия</label>
-                                <input type="number" id="power-weapon" placeholder="50" min="0" max="200">
-                            </div>
-                            <div class="form-group">
-                                <label>Класс</label>
-                                <select id="power-class">
-                                    <option value="0">⚔️ Melee</option>
-                                    <option value="1">🏹 Distance</option>
-                                    <option value="2">🪄 Magic</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tick (кол-во мобов)</label>
-                                <input type="number" id="power-tick" placeholder="4" min="1" max="10" value="4">
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="power-crit-ring">
-                            <label for="power-crit-ring">Spiked Ring (Crit Ring)</label>
-                        </div>
-
-                        <button class="calc-btn" onclick="calculatePowerTraining()">
-                            <i class="fas fa-bolt"></i> Найти моба для Power Train
-                        </button>
-
-                        <div id="power-results" class="calc-results-container"></div>
-                    </div>
-                </div>
-
-                <!-- ТАБА: OFFLINE TRAINING -->
-                <div id="calc-offline-tab" class="calc-tab-content">
-                    <div class="calc-card">
-                        <h3><i class="fas fa-clock"></i> Offline Training</h3>
-                        
-                        <div class="alert info">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Рассчитайте сколько времени нужно для прокачки через dummy (600 опыта/час)</span>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Текущий стат</label>
-                                <input type="number" id="offline-current" placeholder="100" min="5" max="1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Целевой стат</label>
-                                <input type="number" id="offline-goal" placeholder="200" min="5" max="1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Часы тренировки</label>
-                                <input type="number" id="offline-hours" placeholder="24" min="0.1" step="0.1">
-                            </div>
-                        </div>
-
-                        <div class="alert warning">
-                            <i class="fas fa-info-circle"></i>
-                            <span><strong>Заполните ЛИБО целевой стат, ЛИБО часы</strong> (не обязательно оба сразу)</span>
-                        </div>
-
-                        <button class="calc-btn" onclick="calculateOfflineTraining()">
-                            <i class="fas fa-calculator"></i> Рассчитать Offline Train
-                        </button>
-
-                        <div id="offline-results" class="calc-results-container"></div>
-                    </div>
-                </div>
-
-                <!-- ТАБА: SKULL -->
-                <div id="calc-skull-tab" class="calc-tab-content">
-                    <div class="calc-card">
-                        <h3><i class="fas fa-skull"></i> Информация о персонаже</h3>
-                        
-                        <div class="alert info">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Узнайте свои HP/MP, опыт и стоимость черепов</span>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Уровень (LVL)</label>
-                                <input type="number" id="skull-base" placeholder="100" min="1" max="700">
-                            </div>
-                        </div>
-
-                        <button class="calc-btn" onclick="calculateSkull()">
-                            <i class="fas fa-calculator"></i> Рассчитать характеристики
-                        </button>
-
-                        <div id="skull-results" class="calc-results-container"></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- СЕКЦИЯ: СКАМЕРЫ -->
-        <section id="scam-list" class="content-section">
-            <div class="container">
-                <div class="scam-header-box">
-                    <img src="images/Cerberus.PNG.webp" alt="Логотип Cerberus" class="free-icon" width="150" height="150" loading="lazy">
-                    <h2 class="scam-header-title">Список Скамеров</h2>
-                    <p class="scam-header-subtitle">База данных нарушителей Bancus Rucoy</p>
-                </div>
-
-                <div class="scam-text-list">
-                    
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Dwightschrut</span>
-                            <span class="scam-reason">Обман при обмене Gold</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/522" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Ultra Mage Xv</span>
-                            <span class="scam-reason">Обман на Key Ring</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/4030" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Dimon Limon Ha</span>
-                            <span class="scam-reason">Не вернул долг</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/515" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Magic Toop</span>
-                            <span class="scam-reason">Не заплатил за буст</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/12633" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Trz Blood Rain</span>
-                            <span class="scam-reason">Скам на аккаунт в игре</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/21497" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Ledi Bulba</span>
-                            <span class="scam-reason">Обман при обмене Gold</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/23779" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Sawerenokt</span>
-                            <span class="scam-reason">Обман при обмене Gold</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/29834" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
-                    <article class="scam-text-item">
-                        <div class="scam-status">PLAYER</div>
-                        <div class="scam-details">
-                            <span class="scam-nickname">Mini Yetit</span>
-                            <span class="scam-reason">Скам на вещи</span>
-                        </div>
-                        <a href="https://t.me/Bancus_Rucoy/17/47557" target="_blank" rel="noopener noreferrer" class="btn-prufs-small">
-                            Доказательства
-                        </a>
-                    </article>
-
+    <!-- SCAMMERS -->
+    <section id="scam-list" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div id="scammer-search-status" style="display:none; margin-bottom:15px; font-family:'VT323',monospace; font-size:1rem; color:var(--text-secondary);"></div>
+                <img src="images/Cerberus.PNG.webp" alt="Cerberus" class="free-icon">
+                <div>
+                    <h2 class="section-title" style="color:var(--danger);text-shadow:3px 3px 0 #7b1a1a">SCAMMER LIST</h2>
+                    <p class="section-subtitle">Список скамеров в Bancus Rucoy</p>
                 </div>
             </div>
-        </section>
-
-        <!-- СЕКЦИЯ: GOLD -->
-        <section id="gold" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Продажа Gold</h2>
-                <p class="section-subtitle">Актуальный курс и наличие валюты</p>
-                <div class="gold-placeholder">
-                    <i class="fas fa-coins fa-3x" style="color: var(--main-color); margin-bottom: 20px;"></i>
-                    <p>Раздел в разработке</p>
+            <div class="search-scammers-box">
+                    <input type="text" id="scammer-search" placeholder="🔍 Search scammer by nickname..." oninput="searchScammers()">
+                    <button onclick="clearScammerSearch()"><i class="fas fa-times"></i></button>
                 </div>
+            <div class="scam-grid">
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">Dwightschrut</div>
+                    <div class="scam-reason">Обман при обмене Gold</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/522" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">Ultra Mage Xv</div>
+                    <div class="scam-reason">Обман на Key Ring</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/4030" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">Dimon Limon Ha</div>
+                    <div class="scam-reason">Не вернул долг</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/515" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">Magic Toop</div>
+                    <div class="scam-reason">Не заплатил за буст</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/525" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">Drago Draga</div>
+                    <div class="scam-reason">Кинул на Gold</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/527" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">FuryHunter</div>
+                    <div class="scam-reason">Кинул на предметы</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/528" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">ViktorRuler</div>
+                    <div class="scam-reason">Обман при сделке</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/529" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
+                <article class="scam-card">
+                    <div class="scam-badge">PLAYER</div>
+                    <div class="scam-name">DarkMagicX</div>
+                    <div class="scam-reason">Не вернул предметы</div>
+                    <a href="https://t.me/Bancus_Rucoy/17/530" target="_blank" rel="noopener noreferrer" class="btn-proof">📋 Доказательства</a>
+                </article>
             </div>
-        </section>
-
-        <!-- СЕКЦИЯ: GIVEAWAYS -->
-        <section id="giveaways" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Giveaways</h2>
-                <p class="section-subtitle">Участвуйте в розыгрышах и получайте призы!</p>
-                <div class="giveaway-placeholder">
-                    <i class="fas fa-gift fa-3x" style="color: var(--main-color); margin-bottom: 20px;"></i>
-                    <p>Раздел в разработке</p>
-                </div>
-            </div>
-        </section>
-        
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="minimal-footer">
-        <div class="footer-divider"></div>
-        <p class="footer-copyright">© 2026 Bancus Rucoy</p>
-        <div class="footer-links">
-            <a href="https://t.me/Bancus_Rucoy" target="_blank" rel="noopener noreferrer" class="f-link">
-                <i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram
-            </a>
-            <span class="f-separator" aria-hidden="true">|</span>
-            <a href="https://discord.gg/pBmu7Q73" target="_blank" rel="noopener noreferrer" class="f-link">
-                <i class="fab fa-discord" aria-hidden="true"></i> Discord
-            </a>
         </div>
-    </footer>
+    </section>
 
-    <!-- SCRIPTS -->
-    <script>
-        // ============================================
-        // 1. СИСТЕМА ТЕМ
-        // ============================================
-        function setTheme(themeName) {
-            if (themeName === 'default') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('selectedTheme', 'default');
-            } else {
-                document.documentElement.setAttribute('data-theme', themeName);
-                localStorage.setItem('selectedTheme', themeName);
-            }
-        }
-
-        // Восстановление темы при загрузке
-        (function() {
-            const savedTheme = localStorage.getItem('selectedTheme');
-            if (savedTheme && savedTheme !== 'default') {
-                setTheme(savedTheme);
-            }
-        })();
-
-        // ============================================
-        // 2. НАВИГАЦИЯ МЕЖДУ СЕКЦИЯМИ
-        // ============================================
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const sections = document.querySelectorAll('.content-section');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    
-                    // Убираем активный класс у всех секций
-                    sections.forEach(s => s.classList.remove('active'));
-                    
-                    // Показываем нужную секцию
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.classList.add('active');
-                    }
-                    
-                    // Закрываем мобильное меню
-                    document.querySelector('.nav-links').classList.remove('active');
-                    document.body.style.overflow = '';
-                    
-                    // Скролл наверх
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            });
-        });
-
-        // ============================================
-        // 3. ПОИСК RUCOY ONLINE
-        // ============================================
-        async function runRucoySearch() {
-            const nameInput = document.getElementById('search-input');
-            const type = document.getElementById('search-type').value;
-            const resultsBox = document.getElementById('search-results');
-            const name = nameInput.value.trim();
-            
-            if (!name) {
-                alert("Введите имя для поиска!");
-                return;
-            }
-
-            resultsBox.style.display = 'block';
-            resultsBox.innerHTML = `
-                <div class="loading-spinner">
-                    <i class="fas fa-circle-notch fa-spin fa-2x"></i><br><br>
-                    Связываюсь с сервером Rucoy...
+    <!-- GOLD -->
+    <section id="gold" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">GOLD MARKET</h2>
+                    <p class="section-subtitle">Актуальные предложения и цены</p>
                 </div>
-            `;
+            </div>
+            <div id="gold-posts" class="posts-grid">
+                <div class="empty-state">
+                    <span class="pixel-icon">💰</span>
+                    <p>Публикаций пока нет.<br>Скоро появятся предложения!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            try {
-                const botUrl = "https://telegram-bot-2-mgnk.onrender.com"; 
-                const response = await fetch(`${botUrl}/api/search?name=${encodeURIComponent(name)}&type=${type}`);
-                const data = await response.json();
+    <!-- GIVEAWAYS -->
+    <section id="giveaways" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">GIVEAWAYS</h2>
+                    <p class="section-subtitle">Розыгрыши и призы</p>
+                </div>
+            </div>
+            <div id="giveaway-posts" class="posts-grid">
+                <div class="empty-state">
+                    <span class="pixel-icon">🎁</span>
+                    <p>Розыгрышей пока нет.<br>Следите за обновлениями!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                if (data.error) {
-                    resultsBox.innerHTML = `
-                        <div class="player-card-result" style="border-color: #ff4444; text-align:center;">
-                            ❌ ${data.error}
-                        </div>
-                    `;
-                } else if (data.type === 'player') {
-                    const onlineClass = data.online.toLowerCase().includes('online') ? 'is-online' : '';
-                    
-                    resultsBox.innerHTML = `
-                        <article class="player-card-result">
-                            <div class="result-header">
-                                <i class="fas fa-user-shield"></i> Профиль персонажа
-                            </div>
-                            <div class="result-body">
-                                <h3>${escapeHtml(data.name)}</h3>
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-fist-raised"></i> Уровень</span>
-                                    <span class="stat-value">${escapeHtml(data.level)}</span>
-                                </div>
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-users"></i> Гильдия</span>
-                                    <span class="stat-value">${data.guild !== 'None' ? escapeHtml(data.guild) : 'Без гильдии'}</span>
-                                </div>
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-history"></i> Статус</span>
-                                    <span class="stat-value online-status ${onlineClass}">${escapeHtml(data.online)}</span>
-                                </div>
-                                ${data.born ? `
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-baby"></i> Создан</span>
-                                    <span class="stat-value">${escapeHtml(data.born)}</span>
-                                </div>` : ''}
-                                <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link">
-                                    <i class="fas fa-external-link-alt"></i> Профиль на Rucoy
-                                </a>
-                            </div>
-                        </article>
-                    `;
-                } else {
-                    // Вывод клана
-                    resultsBox.innerHTML = `
-                        <article class="player-card-result">
-                            <div class="result-header">
-                                <i class="fas fa-fort-awesome"></i> Информация о клане
-                            </div>
-                            <div class="result-body">
-                                <h3>${escapeHtml(data.name)}</h3>
-                                
-                                <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
-                                    <span class="stat-label"><i class="fas fa-scroll"></i> Описание:</span>
-                                    <span class="stat-value" style="margin-top: 5px; font-style: italic; color: #ddd;">
-                                        ${escapeHtml(data.description)}
-                                    </span>
-                                </div>
+    <!-- NEWS -->
+    <section id="news" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">NEWS</h2>
+                    <p class="section-subtitle">Новости сообщества Bancus Rucoy</p>
+                </div>
+            </div>
+            <div id="news-posts" class="posts-grid">
+                <div class="empty-state">
+                    <span class="pixel-icon">📰</span>
+                    <p>Новостей пока нет.<br>Скоро что-то появится!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-users"></i> Участников</span>
-                                    <span class="stat-value">${escapeHtml(data.members)}</span>
-                                </div>
+    <!-- WIKI -->
+    <section id="wiki" class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">RUCOY WIKI</h2>
+                    <p class="section-subtitle">Гайды и информация по игре</p>
+                </div>
+            </div>
+            <div id="wiki-posts" class="posts-grid">
+                <div class="empty-state">
+                    <span class="pixel-icon">📖</span>
+                    <p>Статей пока нет.<br>Wiki в разработке!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                <div class="stat-row">
-                                    <span class="stat-label"><i class="fas fa-calendar-alt"></i> Создан</span>
-                                    <span class="stat-value">${escapeHtml(data.created_at)}</span>
-                                </div>
+</main>
 
-                                <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link">
-                                    <i class="fas fa-chess-rook"></i> Страница клана
-                                </a>
-                            </div>
-                        </article>
-                    `;
-                }
-            } catch (err) {
-                resultsBox.innerHTML = `
-                    <div class="player-card-result" style="border-color: #ff4444; text-align:center;">
-                        ❌ Ошибка: Сервер не отвечает.
+<!-- FOOTER -->
+<footer class="minimal-footer">
+    <div class="footer-divider"></div>
+    <p class="footer-copyright">© 2026 BANCUS RUCOY — ALL RIGHTS RESERVED</p>
+    <div class="footer-links">
+        <a href="https://t.me/Bancus_Rucoy" target="_blank" rel="noopener noreferrer" class="f-link">
+            <i class="fab fa-telegram-plane"></i> TELEGRAM
+        </a>
+        <span class="f-separator">|</span>
+        <a href="https://discord.gg/pBmu7Q73" target="_blank" rel="noopener noreferrer" class="f-link">
+            <i class="fab fa-discord"></i> DISCORD
+        </a>
+    </div>
+</footer>
+
+<!-- POST MODAL -->
+<div id="post-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box">
+        <div class="modal-header">
+            <span id="modal-section-label">POST</span>
+            <button class="modal-close" onclick="document.getElementById('post-modal').classList.remove('open')" aria-label="Закрыть">✕</button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+    </div>
+</div>
+
+<!-- ADMIN PANEL (скрытая) -->
+<div id="admin-panel" class="modal-overlay" onclick="closeAdminModal(event)">
+    <div class="modal-box">
+        <div class="modal-header">
+            <span>⚙ ADMIN PANEL</span>
+            <button class="modal-close" onclick="document.getElementById('admin-panel').classList.remove('open')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div id="admin-login-form">
+                <div class="form-group" style="margin-bottom:15px">
+                    <label>PASSWORD</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password...">
+                </div>
+                <button class="calc-btn" onclick="adminLogin()"><i class="fas fa-lock"></i> LOGIN</button>
+                <div id="admin-login-error" style="color:var(--danger);margin-top:10px;display:none;font-family:'Press Start 2P',monospace;font-size:0.5rem;line-height:2">❌ Wrong password!</div>
+            </div>
+
+            <div id="admin-content" style="display:none">
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Раздел публикации</label>
+                    <select id="pub-section">
+                        <option value="news">📰 News</option>
+                        <option value="wiki">📖 Wiki</option>
+                        <option value="gold">💰 Gold</option>
+                        <option value="giveaways">🎁 Giveaways</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Заголовок</label>
+                    <input type="text" id="pub-title" placeholder="Заголовок публикации...">
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Описание / Текст</label>
+                    <textarea id="pub-desc" placeholder="Текст публикации..." style="min-height:120px"></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Фото (загрузить с компьютера)</label>
+                    <input type="file" id="pub-image" accept="image/*">
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Кнопка (текст)</label>
+                    <input type="text" id="pub-btn-text" placeholder="Например: Подробнее...">
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                    <label>Кнопка (ссылка)</label>
+                    <input type="text" id="pub-btn-url" placeholder="https://...">
+                </div>
+                <button class="calc-btn" onclick="publishPost()" style="margin-bottom:12px">
+                    <i class="fas fa-paper-plane"></i> ОПУБЛИКОВАТЬ
+                </button>
+                <div id="pub-status" style="display:none"></div>
+
+                <hr style="border-color:rgba(255,255,255,0.1);margin:20px 0">
+
+                <div id="admin-posts-list">
+                    <div style="font-family:'Press Start 2P',monospace;font-size:0.5rem;color:var(--main-color);margin-bottom:12px;line-height:2">УПРАВЛЕНИЕ ПУБЛИКАЦИЯМИ</div>
+                    <div id="manage-posts-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HIDDEN ADMIN TRIGGER: triple-click on footer copyright -->
+
+<script src="calculator.js"></script>
+<script>
+// ============================================
+// UTILS
+// ============================================
+function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.textContent = String(text);
+    return d.innerHTML;
+}
+
+// ============================================
+// THEME
+// ============================================
+function setTheme(t) {
+    if (t === 'default') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'default');
+    } else {
+        document.documentElement.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+    }
+}
+(function() {
+    const t = localStorage.getItem('theme');
+    if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+})();
+
+// ============================================
+// NAVIGATION
+// ============================================
+function showSection(id) {
+    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.add('active');
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (link) link.classList.add('active');
+    document.getElementById('nav-links').classList.remove('active');
+    document.body.style.overflow = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            showSection(href.substring(1));
+        }
+    });
+});
+
+function toggleMenu() {
+    const nav = document.getElementById('nav-links');
+    const open = nav.classList.toggle('active');
+    document.body.style.overflow = open ? 'hidden' : '';
+}
+
+document.addEventListener('click', (e) => {
+    const nav = document.getElementById('nav-links');
+    const btn = document.querySelector('.menu-toggle');
+    if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+// ============================================
+// SEARCH
+// ============================================
+async function runRucoySearch() {
+    const name = document.getElementById('search-input').value.trim();
+    const type = document.getElementById('search-type').value;
+    const box  = document.getElementById('search-results');
+    if (!name) { alert('Введите имя!'); return; }
+
+    box.style.display = 'block';
+    box.innerHTML = `<div class="player-card-result"><div class="loading-spinner"><i class="fas fa-circle-notch fa-spin fa-2x"></i><br><br>SEARCHING...</div></div>`;
+
+    try {
+        const r = await fetch(`https://telegram-bot-2-mgnk.onrender.com/api/search?name=${encodeURIComponent(name)}&type=${type}`);
+        const data = await r.json();
+
+        if (data.error) {
+            box.innerHTML = `<div class="player-card-result"><div class="result-header"><i class="fas fa-times"></i> ERROR</div><div class="result-body"><p style="color:var(--danger)">${escapeHtml(data.error)}</p></div></div>`;
+            return;
+        }
+
+        if (data.type === 'player') {
+            const onl = data.online?.toLowerCase().includes('online') ? 'is-online' : '';
+            box.innerHTML = `
+                <div class="player-card-result">
+                    <div class="result-header"><i class="fas fa-user-shield"></i> PLAYER PROFILE</div>
+                    <div class="result-body">
+                        <h3>${escapeHtml(data.name)}</h3>
+                        <div class="stat-row"><span class="stat-label"><i class="fas fa-fist-raised"></i> Level</span><span class="stat-value">${escapeHtml(data.level)}</span></div>
+                        <div class="stat-row"><span class="stat-label"><i class="fas fa-users"></i> Guild</span><span class="stat-value">${data.guild !== 'None' ? escapeHtml(data.guild) : '—'}</span></div>
+                        <div class="stat-row"><span class="stat-label"><i class="fas fa-clock"></i> Last online</span><span class="stat-value ${onl}">${escapeHtml(data.online)}</span></div>
+                        ${data.born ? `<div class="stat-row"><span class="stat-label"><i class="fas fa-baby"></i> Born</span><span class="stat-value">${escapeHtml(data.born)}</span></div>` : ''}
+                        <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fas fa-external-link-alt"></i> VIEW PROFILE</a>
                     </div>
-                `;
-                console.error('Ошибка поиска:', err);
-            }
+                </div>`;
+        } else {
+            box.innerHTML = `
+                <div class="player-card-result">
+                    <div class="result-header"><i class="fas fa-fort-awesome"></i> GUILD INFO</div>
+                    <div class="result-body">
+                        <h3>${escapeHtml(data.name)}</h3>
+                        <div class="stat-row"><span class="stat-label"><i class="fas fa-users"></i> Members</span><span class="stat-value">${escapeHtml(String(data.members))}</span></div>
+                        <div class="stat-row"><span class="stat-label"><i class="fas fa-calendar"></i> Founded</span><span class="stat-value">${escapeHtml(data.created_at || '?')}</span></div>
+                        ${data.description && data.description !== 'Нет описания' ? `<div class="stat-row" style="flex-direction:column;align-items:flex-start"><span class="stat-label"><i class="fas fa-scroll"></i> Description</span><span class="stat-value" style="margin-top:5px;font-style:italic;color:#ddd">${escapeHtml(data.description)}</span></div>` : ''}
+                        <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener noreferrer" class="btn-link"><i class="fas fa-chess-rook"></i> VIEW GUILD</a>
+                    </div>
+                </div>`;
         }
+    } catch(err) {
+        box.innerHTML = `<div class="player-card-result"><div class="result-header"><i class="fas fa-times"></i> ERROR</div><div class="result-body"><p style="color:var(--danger)">Сервер не отвечает. Попробуйте позже.</p></div></div>`;
+    }
+}
 
-        // Защита от XSS
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
+// ============================================
+// CALC TABS
+// ============================================
+function switchCalcTab(e, name) {
+    document.querySelectorAll('.calc-tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.calc-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`calc-${name}-tab`).classList.add('active');
+    e.target.classList.add('active');
+}
 
-        // ============================================
-        // 4. МОБИЛЬНОЕ МЕНЮ
-        // ============================================
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            const isActive = nav.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        }
+// ============================================
+// POSTS SYSTEM (localStorage)
+// ============================================
+function getPosts(section) {
+    try { return JSON.parse(localStorage.getItem(`posts_${section}`) || '[]'); }
+    catch(e) { return []; }
+}
 
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', (e) => {
-            const menu = document.querySelector('.nav-links');
-            const toggle = document.querySelector('.menu-toggle');
-            
-            if (menu.classList.contains('active') && 
-                !menu.contains(e.target) && 
-                !toggle.contains(e.target)) {
-                menu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+function savePosts(section, posts) {
+    localStorage.setItem(`posts_${section}`, JSON.stringify(posts));
+}
+
+function renderPosts(section, containerId) {
+    const posts = getPosts(section);
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (!posts.length) {
+        const icons = { news:'📰', wiki:'📖', gold:'💰', giveaways:'🎁' };
+        const labels = { news:'Новостей', wiki:'Статей', gold:'Публикаций', giveaways:'Розыгрышей' };
+        container.innerHTML = `<div class="empty-state"><span class="pixel-icon">${icons[section]||'📄'}</span><p>${labels[section]||'Постов'} пока нет.<br>Скоро что-то появится!</p></div>`;
+        return;
+    }
+
+    container.innerHTML = posts.map((p, i) => `
+        <div class="post-card" onclick="openPost('${section}', ${i})">
+            ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.title)}" class="post-img">` : `<div class="post-img-placeholder">${section==='gold'?'💰':section==='giveaways'?'🎁':section==='wiki'?'📖':'📰'}</div>`}
+            <div class="post-body">
+                <div class="post-date"><i class="fas fa-calendar"></i> ${escapeHtml(p.date)}</div>
+                <div class="post-title">${escapeHtml(p.title)}</div>
+                <div class="post-desc">${escapeHtml(p.desc)}</div>
+                ${p.btnText ? `<span class="post-btn">${escapeHtml(p.btnText)}</span>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+function openPost(section, idx) {
+    const posts = getPosts(section);
+    const p = posts[idx];
+    if (!p) return;
+
+    const labels = { news:'📰 NEWS', wiki:'📖 WIKI', gold:'💰 GOLD', giveaways:'🎁 GIVEAWAY' };
+    document.getElementById('modal-section-label').textContent = labels[section] || 'POST';
+    document.getElementById('modal-body').innerHTML = `
+        ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.title)}">` : ''}
+        <div class="modal-date"><i class="fas fa-calendar"></i> ${escapeHtml(p.date)}</div>
+        <h2>${escapeHtml(p.title)}</h2>
+        <p>${escapeHtml(p.desc)}</p>
+        ${p.btnText && p.btnUrl ? `<br><a href="${escapeHtml(p.btnUrl)}" target="_blank" rel="noopener noreferrer" class="post-btn"><i class="fas fa-external-link-alt"></i> ${escapeHtml(p.btnText)}</a>` : ''}
+    `;
+    document.getElementById('post-modal').classList.add('open');
+}
+
+function closeModal(e) {
+    if (e.target === document.getElementById('post-modal')) {
+        document.getElementById('post-modal').classList.remove('open');
+    }
+}
+
+// Инициализация постов
+document.addEventListener('DOMContentLoaded', () => {
+    renderPosts('gold', 'gold-posts');
+    renderPosts('giveaways', 'giveaway-posts');
+    renderPosts('news', 'news-posts');
+    renderPosts('wiki', 'wiki-posts');
+});
+
+// ============================================
+// ADMIN PANEL
+// ============================================
+const ADMIN_PASS = 'bancus2026';
+let adminUnlocked = false;
+let clickCount = 0;
+let clickTimer = null;
+
+// Triple-click on footer copyright to open admin
+document.querySelector('.footer-copyright').addEventListener('click', () => {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 800);
+    if (clickCount >= 3) {
+        clickCount = 0;
+        document.getElementById('admin-panel').classList.add('open');
+    }
+});
+
+function adminLogin() {
+    const pass = document.getElementById('admin-password').value;
+    const err  = document.getElementById('admin-login-error');
+    if (pass === ADMIN_PASS) {
+        adminUnlocked = true;
+        document.getElementById('admin-login-form').style.display = 'none';
+        document.getElementById('admin-content').style.display = 'block';
+        refreshManagePosts();
+    } else {
+        err.style.display = 'block';
+        document.getElementById('admin-password').value = '';
+    }
+}
+
+function closeAdminModal(e) {
+    if (e.target === document.getElementById('admin-panel')) {
+        document.getElementById('admin-panel').classList.remove('open');
+    }
+}
+
+async function publishPost() {
+    if (!adminUnlocked) return;
+    const section  = document.getElementById('pub-section').value;
+    const title    = document.getElementById('pub-title').value.trim();
+    const desc     = document.getElementById('pub-desc').value.trim();
+    const btnText  = document.getElementById('pub-btn-text').value.trim();
+    const btnUrl   = document.getElementById('pub-btn-url').value.trim();
+    const imgFile  = document.getElementById('pub-image').files[0];
+    const status   = document.getElementById('pub-status');
+
+    if (!title || !desc) {
+        status.style.display = 'block';
+        status.innerHTML = '<div class="alert danger"><i class="fas fa-times"></i> Заполните заголовок и описание!</div>';
+        return;
+    }
+
+    let imageData = '';
+    if (imgFile) {
+        imageData = await new Promise(res => {
+            const reader = new FileReader();
+            reader.onload = e => res(e.target.result);
+            reader.readAsDataURL(imgFile);
         });
-    </script>
+    }
 
-    <!-- CALCULATOR SCRIPT -->
-    <script src="calculator.js"></script>
+    const post = {
+        title,
+        desc,
+        image: imageData,
+        btnText,
+        btnUrl,
+        date: new Date().toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric' })
+    };
+
+    const posts = getPosts(section);
+    posts.unshift(post);
+    savePosts(section, posts);
+
+    // Очищаем форму
+    document.getElementById('pub-title').value = '';
+    document.getElementById('pub-desc').value = '';
+    document.getElementById('pub-btn-text').value = '';
+    document.getElementById('pub-btn-url').value = '';
+    document.getElementById('pub-image').value = '';
+
+    status.style.display = 'block';
+    status.innerHTML = '<div class="alert success"><i class="fas fa-check"></i> Опубликовано!</div>';
+    setTimeout(() => { status.style.display = 'none'; }, 3000);
+
+    // Обновляем нужный раздел
+    const containers = { news:'news-posts', wiki:'wiki-posts', gold:'gold-posts', giveaways:'giveaway-posts' };
+    renderPosts(section, containers[section]);
+    refreshManagePosts();
+}
+
+function refreshManagePosts() {
+    const sections = ['news','wiki','gold','giveaways'];
+    const labels   = { news:'📰 News', wiki:'📖 Wiki', gold:'💰 Gold', giveaways:'🎁 Giveaways' };
+    const containers = { news:'news-posts', wiki:'wiki-posts', gold:'gold-posts', giveaways:'giveaway-posts' };
+    const grid = document.getElementById('manage-posts-grid');
+
+    let html = '';
+    sections.forEach(sec => {
+        const posts = getPosts(sec);
+        if (!posts.length) return;
+        html += `<div style="font-family:'VT323',monospace;font-size:1rem;color:var(--main-color);margin:10px 0 6px">${labels[sec]} (${posts.length})</div>`;
+        posts.forEach((p, i) => {
+            html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:2px solid rgba(255,255,255,0.1);margin-bottom:6px;gap:10px">
+                <span style="font-size:1rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(p.title)}</span>
+                <button onclick="deletePost('${sec}',${i})" style="background:var(--danger);border:2px solid #7b1a1a;color:#fff;padding:4px 10px;font-family:'VT323',monospace;font-size:1rem;cursor:pointer;flex-shrink:0">DEL</button>
+            </div>`;
+        });
+    });
+
+    grid.innerHTML = html || '<div style="color:var(--text-secondary);font-size:1rem">Публикаций нет</div>';
+}
+
+function deletePost(section, idx) {
+    const posts = getPosts(section);
+    posts.splice(idx, 1);
+    savePosts(section, posts);
+    const containers = { news:'news-posts', wiki:'wiki-posts', gold:'gold-posts', giveaways:'giveaway-posts' };
+    renderPosts(section, containers[section]);
+    refreshManagePosts();
+}
+
+// ============================================
+// ПОИСК ПО СКАМЕРАМ
+// ============================================
+function searchScammers() {
+    const query = document.getElementById('scammer-search').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.scam-card');
+    const status = document.getElementById('scammer-search-status');
+    
+    let found = 0;
+    
+    cards.forEach(card => {
+        const name = card.querySelector('.scam-name').textContent.toLowerCase();
+        const reason = card.querySelector('.scam-reason').textContent.toLowerCase();
+        
+        if (query === '' || name.includes(query) || reason.includes(query)) {
+            card.classList.remove('hidden');
+            found++;
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+    
+    // Статус поиска
+    if (query === '') {
+        status.style.display = 'none';
+    } else {
+        status.style.display = 'block';
+        status.innerHTML = found > 0 
+            ? `<i class="fas fa-check-circle" style="color:var(--success)"></i> Found ${found} scammer(s)`
+            : `<i class="fas fa-times-circle" style="color:var(--danger)"></i> No scammers found for "${query}"`;
+    }
+}
+
+function clearScammerSearch() {
+    document.getElementById('scammer-search').value = '';
+    searchScammers();
+}
+</script>
 
 </body>
 </html>

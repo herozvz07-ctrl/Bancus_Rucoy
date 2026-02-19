@@ -207,7 +207,7 @@ function populateMobSelects() {
     });
 }
 
-function switchCalcTab(tabName) {
+function switchCalcTab(e, tabName) {
     document.querySelectorAll('.calc-tab-content').forEach(tab => {
         tab.classList.remove('active');
     });
@@ -221,7 +221,7 @@ function switchCalcTab(tabName) {
         targetTab.classList.add('active');
     }
     
-    event.target.classList.add('active');
+    e.target.classList.add('active');
 }
 
 // ============================================
@@ -249,10 +249,11 @@ function calculateDamage() {
             max_raw = Formulas.auto_max_raw_damage_Calc(stat, weapon, base);
             break;
         case 1:
+        case 2:
             min_raw = Formulas.special_meldist_min_raw_damage_Calc(stat, weapon, base);
             max_raw = Formulas.special_meldist_max_raw_damage_Calc(stat, weapon, base);
             break;
-        case 2:
+        case 3:
             min_raw = Formulas.special_magic_min_raw_damage_Calc(stat, weapon, base);
             max_raw = Formulas.special_magic_max_raw_damage_Calc(stat, weapon, base);
             break;
@@ -268,7 +269,7 @@ function calculateDamage() {
     const avg_dmg = Formulas.average_damage_Calc(total_acc, max_dmg, min_dmg, max_crit_dmg, critRing);
     
     const mob = mobs[mobIndex];
-    const attackTypes = ['Auto атака', '⚔️ Special (Мел/Дист)', '🪄 Special (Магия)'];
+    const attackTypes = ['Auto attack', '⚔️ Special Melee', '🏹 Special Distance', '🪄 Special Magic'];
     
     let html = `
         <div class="result-title">
