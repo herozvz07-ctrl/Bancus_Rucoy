@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bancus.c6t.ru/sitemap.xml
