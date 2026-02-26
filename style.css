@@ -21,38 +21,25 @@
     --pixel-shadow-sm: 2px 2px 0px var(--main-color-dark);
 }
 
-[data-theme="green"] {
-    --main-color: #2ecc71;
-    --main-color-rgba: rgba(46, 204, 113, 0.4);
-    --main-color-dark: #27ae60;
-    --pixel-shadow: 4px 4px 0px #1e8449;
-    --pixel-shadow-sm: 2px 2px 0px #1e8449;
-}
+
 
 /* ── RESET & BASE ─────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    background-color: #000000;
+}
 
 body {
     font-family: 'VT323', monospace;
     font-size: 18px;
-    background-color: var(--bg-dark);
+    background-color: transparent;
     color: var(--text-primary);
     min-height: 100vh;
-    /* Pixel grid background */
-    background-image:
-        linear-gradient(rgba(241,196,15,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(241,196,15,0.03) 1px, transparent 1px);
-    background-size: 32px 32px;
     line-height: 1.6;
-}
-
-[data-theme="green"] body {
-    background-image:
-        linear-gradient(rgba(46,204,113,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(46,204,113,0.03) 1px, transparent 1px);
-    background-size: 32px 32px;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* ── PIXEL UTILITIES ──────────────────────────── */
@@ -80,7 +67,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--bg-dark);
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(6px);
     border-bottom: 3px solid var(--main-color);
     box-shadow: 0 3px 0 var(--main-color-dark);
 }
@@ -162,33 +150,15 @@ body {
     flex-shrink: 0;
 }
 
-/* Theme buttons */
-.theme-selection {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-}
-
-.theme-btns-container { display: flex; gap: 6px; }
-
-.t-btn {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #555;
-    cursor: pointer;
-    transition: all 0.1s;
-    image-rendering: pixelated;
-}
-
-.t-btn:hover { border-color: #fff; transform: scale(1.2); }
-.t-btn.yellow { background: #f1c40f; }
-.t-btn.green  { background: #2ecc71; }
 
 /* ── MAIN CONTENT ─────────────────────────────── */
-.main-content { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+.main-content { 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+}
 
 .content-section { display: none; animation: pixelIn 0.3s steps(4) forwards; }
 .content-section.active { display: block; }
@@ -1179,9 +1149,19 @@ body {
 /* ── CONTAINER ────────────────────────────────── */
 .container { max-width: 1200px; margin: 0 auto 30px; }
 
-/* ── MOBILE ───────────────────────────────────── */
+/* ── MOBILE для телфонов епта ───────────────────────────────────── */
 @media (max-width: 992px) {
-    .menu-toggle { display: flex; }
+    .menu-toggle {
+        display: flex;
+        background: none;
+        border: 2px solid var(--main-color);
+        color: var(--main-color);
+        padding: 6px 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
 
     .nav-links {
         display: none;
@@ -1254,4 +1234,47 @@ body {
     background: var(--bg-card);
     border: 3px solid var(--main-color);
     box-shadow: 3px 3px 0 var(--main-color-dark);
+}
+
+/* ── BACKGROUND SLIDESHOW ─────────────────────── */
+.bg-slideshow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: #000;
+}
+
+.bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.bg-slide.active {
+    opacity: 1;
+}
+
+.bg-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65); 
+}
+
+.minimal-footer {
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 40px;
+    border-top: 3px solid var(--main-color);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
