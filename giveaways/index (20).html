@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rucoy Online Giveaways — розыгрыши призов и предметов в сообществе Bancus Rucoy.">
+    <meta name="keywords" content="Rucoy Online giveaway, Rucoy prizes, Rucoy free items">
+    <meta property="og:title" content="Rucoy Online Giveaways — Bancus Rucoy">
+    <meta property="og:url" content="https://bancus.c6t.ru/giveaways">
+    <meta name="theme-color" content="#f1c40f">
+    <title>Bancus Rucoy — Giveaways</title>
+    <link rel="canonical" href="https://bancus.c6t.ru/giveaways">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-slideshow">
+    <div class="bg-slide active" style="background-image: url('../images/Dueal.jpg')"></div>
+    <div class="bg-slide" style="background-image: url('../images/Drow_1.webp')"></div>
+</div>
+
+<header class="main-header">
+    <nav class="main-nav">
+        <div class="logo">&gt; BANCUS_</div>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Меню">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/">[ HOME ]</a></li>
+            <li><a href="/calculator">[ CALC ]</a></li>
+            <li><a href="/partners">[ Partners ]</a></li>
+            <li><a href="/scam">[ SCAMERS ]</a></li>
+            <li><a href="/gold">[ GOLD ]</a></li>
+            <li><a href="/giveaways">[ GIWEYS ]</a></li>
+            <li><a href="/news">[ NEWS ]</a></li>
+            <li><a href="/wiki">[ WIKI ]</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="content-section active">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">GIVEAWAYS</h2>
+                    <p class="section-subtitle">Розыгрыши и призы</p>
+                </div>
+            </div>
+            <div id="giveaway-posts" class="posts-grid"></div>
+        </div>
+    </section>
+</main>
+
+<footer class="minimal-footer">
+    <div class="footer-divider"></div>
+    <p class="footer-copyright">© 2026 BANCUS RUCOY — ALL RIGHTS RESERVED</p>
+    <div class="footer-links">
+        <a href="https://t.me/Bancus_Rucoy" target="_blank" rel="noopener noreferrer" class="f-link"><i class="fab fa-telegram-plane"></i> TELEGRAM</a>
+        <span class="f-separator">|</span>
+        <a href="https://discord.gg/pBmu7Q73" target="_blank" rel="noopener noreferrer" class="f-link"><i class="fab fa-discord"></i> DISCORD</a>
+    </div>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script src="../js/admin.js"></script>
+<script>renderAdminPanel(); renderNav(); renderFooter(); document.addEventListener('DOMContentLoaded', () => renderPosts('giveaways', 'giveaway-posts'));</script>
+</body>
+</html>

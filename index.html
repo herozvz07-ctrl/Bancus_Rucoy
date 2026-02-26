@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bancus Rucoy — поиск игроков, Wiki, новости, партнёры и база скамеров">
+    <meta name="description" content="Bancus Rucoy — лучший сайт для Rucoy Online. Поиск игроков, калькулятор урона, Wiki, Gold Market, новости и список скамеров.">
+    <meta name="keywords" content="Rucoy Online, Rucoy calculator, Rucoy damage calculator, Rucoy wiki, Rucoy gold, Rucoy players, Bancus Rucoy">
+    <meta property="og:title" content="Bancus Rucoy — Rucoy Online Tools">
+    <meta property="og:description" content="Поиск игроков, калькулятор урона, Wiki и многое другое для Rucoy Online">
+    <meta property="og:url" content="https://bancus.c6t.ru/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bancus.c6t.ru/images/12dd6b0b-6cbc-4dba-8dc4-72c564bec735-removebg-preview.png">
     <meta name="theme-color" content="#f1c40f">
     <title>Bancus Rucoy — Home</title>
+    <link rel="canonical" href="https://bancus.c6t.ru/">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 </head>
+<body>
+
+<div class="bg-slideshow">
+    <div class="bg-slide active" style="background-image: url('images/Dueal.jpg')"></div>
+    <div class="bg-slide" style="background-image: url('images/Drow_1.webp')"></div>
+</div>
 
 <header class="main-header">
     <nav class="main-nav">
@@ -30,13 +43,6 @@
         </ul>
     </nav>
 </header>
-<body>
-    <div class="bg-slideshow">
-    <div class="bg-slide active" style="background-image: url('images/Dueal.jpg')"></div>
-    <div class="bg-slide" style="background-image: url('images/Drow_1.webp')"></div>
-</div>
-<script src="js/nav.js"></script>
-<script>renderNav();</script>
 
 <main class="main-content">
     <section class="content-section active">
@@ -53,7 +59,7 @@
         </div>
 
         <div class="container welcome-section" style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
-            <img src="images/12dd6b0b-6cbc-4dba-8dc4-72c564bec735-removebg-preview.png" alt="Search" class="section-icon" style="width:64px;height:64px;">
+            <img src="images/12dd6b0b-6cbc-4dba-8dc4-72c564bec735-removebg-preview.png" alt="Bancus Rucoy" class="section-icon" style="width:64px;height:64px;">
             <div style="text-align:left;">
                 <h1 style="margin-bottom:5px;">BANCUS RUCOY</h1>
                 <p style="margin:0;">Ваш проводник в мире Rucoy Online</p>
@@ -62,7 +68,6 @@
     </section>
 </main>
 
-<!-- FOOTER -->
 <footer class="minimal-footer">
     <div class="footer-divider"></div>
     <p class="footer-copyright">© 2026 BANCUS RUCOY — ALL RIGHTS RESERVED</p>
@@ -77,8 +82,9 @@
     </div>
 </footer>
 
+<script src="js/nav.js"></script>
 <script src="js/admin.js"></script>
-<script>renderAdminPanel(); renderFooter();</script>
+<script>renderAdminPanel(); renderNav(); renderFooter();</script>
 <script>
 async function runRucoySearch() {
     const name = document.getElementById('search-input').value.trim();
